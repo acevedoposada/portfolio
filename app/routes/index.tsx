@@ -1,7 +1,7 @@
 export default function Index() {
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
-      <h1>Next David Acevedo Portfolio</h1>
+    <div>
+      <h1 className="text-[56px]">Next David Acevedo Portfolio</h1>
     </div>
   );
 }

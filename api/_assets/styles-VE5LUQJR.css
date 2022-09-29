@@ -1,0 +1,23 @@
+.content {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1400px) {
+  .content {
+    width: 1400px;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 809px) {
+  .content {
+    width: 100%;
+    padding: 0 20px;  
+  }
+}
