@@ -1,9 +1,11 @@
 import type { LinksFunction } from "@remix-run/node";
 // import { useLoaderData } from "@remix-run/react";
 
-// import { db } from "~/utils/db.server";
+import { projectId } from "~/utils/db.server";
 
 import blogStyles from "~/styles/pages/blog.css";
+
+console.log(process.env);
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: blogStyles }];
@@ -32,6 +34,7 @@ export default function Blog() {
       {/* {data.map((element: any) => (
         <div key={element.id}>{element.title}</div>
       ))} */}
+      {projectId}
     </div>
   );
 }
