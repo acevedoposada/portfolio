@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import styles from "~/styles/pages/index.css";
 
 import workingImg from "~/assets/images/working.webp";
-import background from "~/assets/images/background-index-wip.webp";
+import background from "~/assets/images/background-wip.webp";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }];
@@ -57,7 +57,9 @@ export default function Index() {
             </motion.p>
           </div>
           <motion.a
-            className="cursor-pointer rounded-[4px] bg-sky-400 px-5 py-2 text-xl font-semibold text-white shadow-lg hover:bg-sky-500 md:text-base"
+            href="/assets/Cristian_David_Acevedo_Posada_-_Semi_Senior_Frontend_Developer.pdf"
+            download="Cristian_David_Acevedo_Posada_-_Semi_Senior_Frontend_Developer.pdf"
+            className="cursor-pointer rounded-md bg-sky-400 px-6 py-3 text-2xl font-semibold text-white shadow-lg hover:bg-sky-500"
             initial={{ scale: 0 }}
             animate={{ scale: 0.6 }}
             transition={{
