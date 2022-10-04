@@ -46,7 +46,7 @@ export default function Index() {
             <motion.div
               layout
               initial={{ borderRadius: 30 }}
-              className={clsx("content-wrapper", {
+              className={clsx("content-wrapper shadow-lg", {
                 "mr-[-62px] md:mr-[-86px]": isOpen,
               })}
               data-isOpen={isOpen}
