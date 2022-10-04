@@ -49,7 +49,7 @@ export default function Index() {
             />
           </motion.div>
           {showAnimation && (
-            <div className="absolute top-1/2 left-1/2 z-[1] h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 md:h-[850px] md:w-[850px]">
+            <div className="absolute top-1/2 left-1/2 z-[1] h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 opacity-60 md:h-[850px] md:w-[850px]">
               <Lottie
                 height="100%"
                 width="100%"
