@@ -1,4 +1,5 @@
 import type { LinksFunction } from "@remix-run/node";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie";
 
@@ -7,7 +8,6 @@ import styles from "~/styles/pages/index.css";
 import workingImg from "~/assets/images/working.webp";
 import background from "~/assets/images/background-wip.webp";
 import animationData from "~/assets/lottie/fireworks-shine.json";
-import { useEffect, useState } from "react";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }];
@@ -19,8 +19,8 @@ export default function Index() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowAnimation(true);
+      clearTimeout(timer);
     }, 300);
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -35,7 +35,7 @@ export default function Index() {
       <div className="absolute flex h-full w-full flex-col items-center justify-center">
         <div className="relative h-[250px] w-[250px] md:h-[400px] md:w-[400px]">
           <motion.div
-            className="absolute z-[2] h-full w-full cursor-pointer overflow-hidden rounded-full border-4 shadow-lg"
+            className="absolute z-[2] h-full w-full overflow-hidden rounded-full border-4 shadow-lg"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", bounce: 0.6 }}
@@ -49,7 +49,7 @@ export default function Index() {
             />
           </motion.div>
           {showAnimation && (
-            <div className="absolute top-1/2 left-1/2 z-[1] h-[450px] w-[450px] -translate-x-1/2 -translate-y-1/2 opacity-60 md:h-[850px] md:w-[850px]">
+            <div className="animation absolute top-1/2 left-1/2 z-[1] h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 cursor-default opacity-60 md:h-[850px] md:w-[850px]">
               <Lottie
                 height="100%"
                 width="100%"
@@ -65,7 +65,7 @@ export default function Index() {
 
         <div className="mt-4 overflow-hidden py-2">
           <motion.h1
-            className="text-5xl font-semibold text-white"
+            className="text-center text-3xl font-semibold text-white md:text-5xl"
             initial={{ y: 80 }}
             animate={{ y: 0 }}
             transition={{ delay: 0.6 }}
@@ -73,7 +73,7 @@ export default function Index() {
             Site on construction
           </motion.h1>
         </div>
-        <div className="mt-8 flex flex-col items-center gap-2">
+        <div className="mt-5 flex flex-col items-center gap-1 md:mt-8 md:gap-2">
           <div className="-mt-2 overflow-hidden pt-2">
             <motion.p
               className="text-white opacity-70"
