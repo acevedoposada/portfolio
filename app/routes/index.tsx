@@ -47,7 +47,7 @@ export default function Index() {
               layout
               initial={{ borderRadius: 30 }}
               className={clsx("content-wrapper shadow-lg", {
-                "mr-[-62px] md:mr-[-86px]": isOpen,
+                "mr-[-62px] md:mr-[-32px]": isOpen,
               })}
               data-isOpen={isOpen}
             >
@@ -62,7 +62,7 @@ export default function Index() {
                       <b className="text-indigo-900">David Acevedo 😁</b> and
                       I'm Frontend Developer. I love so much the animations,
                       creative sites and micro-interactions. <br />
-                      Thanks for visit my site, I'm working in more features 🫣!
+                      Thanks for visit my site, I'm working in more features! 🫣
                       <br />
                     </p>
                   </div>

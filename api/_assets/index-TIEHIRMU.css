@@ -13,12 +13,9 @@
   width: 56px;
   cursor: pointer;
   background-color: rgb(251, 146, 60 );
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
   font-size: 1.875rem;
   line-height: 2.25rem;
   color: white;
-  border-width: 0px;
 }
 
 .content-wrapper[data-isOpen="true"] {
@@ -29,10 +26,9 @@
   align-items: flex-start;
   cursor: default;
   color:rgba(255, 255, 255, 0.05);
-  background-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(3.8px);
   -webkit-backdrop-filter: blur(3.8px);
-  border: 1px solid rgba(255, 255, 255, 0.33);
 }
 
 @media (min-width: 768px) {
