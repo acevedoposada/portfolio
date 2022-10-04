@@ -12,11 +12,11 @@ export const links: LinksFunction = () => {
 
 export default function Index() {
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center gap-5 overflow-hidden bg-sky-300">
+    <main className="absolute flex h-full w-full flex-col items-center justify-center gap-5 overflow-hidden bg-sky-300">
       <img
         src={background}
         alt="background"
-        className="h-screen w-full bg-left object-cover"
+        className="h-full w-full bg-left object-cover"
       />
       <div className="glass absolute h-full w-full" />
 
