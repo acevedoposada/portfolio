@@ -1,0 +1,19 @@
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(3.8px);
+  -webkit-backdrop-filter: blur(3.8px);
+}
+
+.animation [role="button"] {
+  cursor: default;
+}
+
+.content-wrapper[data-isOpen="true"] {
+  width: 400px;
+  height: 200px;
+  padding: 30px;
+  border-radius: 30px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  cursor: default;
+}

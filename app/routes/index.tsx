@@ -1,7 +1,9 @@
 import type { LinksFunction } from "@remix-run/node";
 import { useEffect, useState } from "react";
+import { HiPlus } from "react-icons/hi";
 import { motion } from "framer-motion";
 import Lottie from "react-lottie";
+import clsx from "clsx";
 
 import styles from "~/styles/pages/index.css";
 
@@ -15,6 +17,7 @@ export const links: LinksFunction = () => {
 
 export default function Index() {
   const [showAnimation, setShowAnimation] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,6 +37,56 @@ export default function Index() {
 
       <div className="absolute flex h-full w-full flex-col items-center justify-center">
         <div className="relative h-[250px] w-[250px] md:h-[400px] md:w-[400px]">
+          <motion.div
+            className="absolute top-3 right-3 z-10 md:top-8 md:right-8"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <motion.div
+              layout
+              initial={{ borderRadius: 30 }}
+              className={clsx("content-wrapper", {
+                "mr-[-62px] md:mr-[-86px]": isOpen,
+              })}
+              data-isOpen={isOpen}
+            >
+              <div className="relative">
+                {isOpen && (
+                  <div className="w-full py-2 pl-2">
+                    <h1 className="mb-2 font-semibold text-indigo-900">
+                      Who I am?
+                    </h1>
+                    <p className="text-lg text-black">
+                      My name is{" "}
+                      <b className="text-indigo-900">David Acevedo 😁</b> and
+                      I'm Frontend Developer. I love so much the animations,
+                      creative sites and micro-interactions. <br />
+                      Thanks for visit my site, I'm working in more features 🫣!
+                      <br />
+                    </p>
+                  </div>
+                )}
+                <motion.div
+                  onClick={() => setIsOpen(!isOpen)}
+                  layout
+                  className={clsx(
+                    "absolute flex h-14 w-14 cursor-pointer items-center justify-center rounded-full",
+                    {
+                      "-top-2 -right-2": isOpen,
+                    }
+                  )}
+                >
+                  <HiPlus
+                    className={clsx("transition-all", {
+                      "rotate-45": isOpen,
+                      "text-black": isOpen,
+                    })}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
           <motion.div
             className="absolute z-[2] h-full w-full overflow-hidden rounded-full border-4 shadow-lg"
             initial={{ scale: 0 }}

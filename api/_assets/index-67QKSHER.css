@@ -1,0 +1,13 @@
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(3.8px);
+  -webkit-backdrop-filter: blur(3.8px);
+}
+
+.animation [role="button"] {
+  cursor: default;
+}
+
+.transition-ease {
+  transition: all .3s ease-in;
+}

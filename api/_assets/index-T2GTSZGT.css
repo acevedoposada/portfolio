@@ -9,8 +9,11 @@
 }
 
 .content-wrapper {
+  display: flex;
   height: 56px;
   width: 56px;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   background-color: rgb(251, 146, 60 );
   font-size: 1.875rem;
@@ -19,18 +22,12 @@
 }
 
 .content-wrapper[data-isOpen="true"] {
-  width: 350px;
-  height: 250px;
+  width: 400px;
+  height: 300px;
   padding: 13px 15px;
   justify-content: flex-end;
   align-items: flex-start;
   cursor: default;
   background: white;
   color:rgba(255, 255, 255, 0.05);
-}
-
-@media (min-width: 768px) {
-  .content-wrapper[data-isOpen="true"] {
-    width: 400px;
-  }
 }
