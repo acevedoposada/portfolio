@@ -37,12 +37,10 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-sky-100">
-        <GeneralLayout>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </GeneralLayout>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );

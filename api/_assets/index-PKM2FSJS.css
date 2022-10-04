@@ -1,0 +1,4 @@
+.working-image {
+  @apply h-full w-full object-cover;
+  transform: translateY(-50%);
+}
