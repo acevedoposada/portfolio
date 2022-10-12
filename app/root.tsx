@@ -8,12 +8,13 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/tailwind.css";
-import globalStyles from "./styles/global.css";
 import {
   GeneralLayout,
   links as generalLayoutStyles,
-} from "~/components/general-layout";
+} from "~/layouts/general-layout";
+
+import tailwindStylesheetUrl from "./styles/tailwind.css";
+import globalStyles from "./styles/global.css";
 
 export const links: LinksFunction = () => {
   return [

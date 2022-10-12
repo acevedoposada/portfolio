@@ -37,7 +37,8 @@
     "google-auth-library": "^8.5.2",
     "googleapis": "^108.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.7.2",

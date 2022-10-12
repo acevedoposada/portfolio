@@ -1,0 +1,41 @@
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.content {
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  grid-auto-rows: min-content;
+  grid-template-rows: repeat(3, min-content);
+}
+
+.title {
+  font-size: clamp(0px, 22vw, 320px);
+  letter-spacing: -0.05em;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    width: 1400px;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .container {
+    width: 100%;
+  }
+  
+  .content {
+    padding: 10px 40px 80px;
+  }
+}
+
+@media (max-width: 809px) {
+  .container {
+    width: 100%;
+  }
+
+  .content {
+    padding: 0 20px;
+  }
+}

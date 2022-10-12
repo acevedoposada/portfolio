@@ -1,0 +1,15 @@
+@media (max-width: 809px) { 
+  .card-container {
+    grid-column: unset;
+  }
+}
+
+.card-wrapper {
+  height: 305px;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .large-card {
+    grid-column: auto / span 3;
+  }
+}

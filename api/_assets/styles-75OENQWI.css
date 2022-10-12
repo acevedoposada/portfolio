@@ -1,0 +1,17 @@
+.layout {
+  position: relative;
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  grid-auto-rows: min-content;
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .layout {
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+  }
+}
+
+@media (max-width: 809px) {
+  .layout {
+    grid-template-columns: repeat(1, minmax(50px, 1fr));
+  }
+}
