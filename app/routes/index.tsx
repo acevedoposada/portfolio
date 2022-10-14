@@ -36,7 +36,13 @@ export default function Index() {
     >
       <motion.div variants={item} className="card-wrapper col-span-2">
         <CardLink uri="/about" classes={{ card: "p-5" }}>
-          1
+          <motion.img
+            className="h-[90px] w-[90px]"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", bounce: 0.7 }}
+            src="/assets/avatar.png"
+          />
         </CardLink>
       </motion.div>
 

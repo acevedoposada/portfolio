@@ -3,6 +3,7 @@ import { useLocation } from "@remix-run/react";
 
 export const useGeneralLayout = () => {
   const [title, setTitle] = useState<string | null>(null);
+  const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
   const location = useLocation();
 
@@ -26,5 +27,16 @@ export const useGeneralLayout = () => {
     }
   }, [location.pathname, routes]);
 
-  return { title, routes, location };
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        setShowNavbar(false);
+      }
+    });
+    return () => window.removeEventListener("resize", () => {});
+  }, []);
+
+  const toggleNavbar = () => setShowNavbar(!showNavbar);
+
+  return { title, routes, location, showNavbar, toggleNavbar };
 };

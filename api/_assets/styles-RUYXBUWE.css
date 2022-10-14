@@ -13,11 +13,6 @@
   letter-spacing: -0.05em;
 }
 
-.button--icon {
-  top: calc(50% - 12.5px);
-  left: calc(50% - 12.5px);
-}
-
 @media (min-width: 1400px) {
   .wrapper {
     width: 1400px;

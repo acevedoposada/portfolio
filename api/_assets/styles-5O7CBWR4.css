@@ -15,7 +15,7 @@
 
 .button--icon {
   top: calc(50% - 12.5px);
-  left: calc(50% - 12.5px);
+  left: cal(50% - 12.5px);
 }
 
 @media (min-width: 1400px) {
