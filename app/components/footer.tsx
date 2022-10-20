@@ -5,7 +5,7 @@ import appRoutes from "~/utils/routes";
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col items-center pt-10">
+    <footer className="flex flex-col items-center pt-20">
       <div className="flex flex-col items-center gap-6 md:flex-row">
         <Link to="/">
           <h3 className="pointer-events-none -mt-1 select-none whitespace-nowrap text-xl font-bold leading-none text-cyan-900">
