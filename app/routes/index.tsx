@@ -51,12 +51,7 @@ export default function Index() {
   const { lastExp } = useLoaderData();
 
   return (
-    <GridLayout
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="cards-container pt-6 pb-10"
-    >
+    <GridLayout variants={container} initial="hidden" animate="show">
       <motion.div variants={item} className="card-wrapper col-span-2">
         <CardLink uri="/about" classes={{ children: "justify-between" }}>
           <motion.img
@@ -83,7 +78,7 @@ export default function Index() {
           <p className="text-sm uppercase tracking-tighter text-gray-500">
             Learn more about me
           </p>
-          <h4 className="text-[28px] font-semibold tracking-tight">
+          <h4 className="text-[28px] font-semibold leading-none tracking-tight">
             See my resume
           </h4>
         </CardLink>
@@ -105,7 +100,12 @@ export default function Index() {
         <CardLink
           uri="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
           isExternal
-          classes={{ children: "flex items-center justify-center" }}
+          classes={{
+            children:
+              "flex items-center justify-center pr-8 absolute w-full h-full",
+            card: "relative",
+            iconWrapper: "pl-0 md:pl-0 ml-auto",
+          }}
         >
           <BsLinkedin
             className="text-primary-700 transition-colors group-hover:text-primary-900"

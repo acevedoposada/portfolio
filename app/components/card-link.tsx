@@ -9,6 +9,7 @@ import { Card, Link } from "~/components";
 interface Classes {
   card?: string;
   children?: string;
+  iconWrapper?: string;
 }
 
 interface CardLinkProps extends CardProps {
@@ -29,13 +30,18 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
       <Card className={clsx(classes?.card, "group flex h-full cursor-pointer")}>
         <div
           className={clsx(
-            classes?.children,
-            "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8"
+            "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
+            classes?.children
           )}
         >
           {children}
         </div>
-        <div className="flex items-end pl-2 pr-5 pb-5 md:pr-8 md:pl-2 md:pb-8">
+        <div
+          className={clsx(
+            "flex items-end pl-2 pr-5 pb-5 md:pr-8 md:pl-2 md:pb-8",
+            classes?.iconWrapper
+          )}
+        >
           <button
             className={clsx(
               "flex h-8 min-h-[2rem] w-8 min-w-[2rem] items-center justify-center rounded-full border-2 border-gray-400 bg-gray-100 text-gray-400 transition-all group-hover:border-primary-500 group-hover:bg-primary-100 group-hover:text-primary-500",

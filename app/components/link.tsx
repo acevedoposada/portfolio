@@ -8,10 +8,15 @@ interface LinkProps extends RemixLinkProps {
 }
 
 export const Link: FuncComponent<LinkProps> = (props) => {
-  const { isExternal, to, children } = props;
+  const { isExternal, to, children, className } = props;
   if (isExternal)
     return (
-      <a {...props} href={to as string} rel="noreferrer" target="_blank">
+      <a
+        className={className}
+        href={to as string}
+        rel="noreferrer"
+        target="_blank"
+      >
         {children}
       </a>
     );

@@ -1,9 +1,3 @@
-@media (max-width: 809px) { 
-  .cards-container > div {
-    grid-column: unset;
-  }
-}
-
 .card-wrapper {
   height: 305px;
 }

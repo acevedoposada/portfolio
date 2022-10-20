@@ -16,6 +16,6 @@
   }
 
   .layout > * {
-    grid-column: unset;
+        grid-column: unset;
   }
 }
