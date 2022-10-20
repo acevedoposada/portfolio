@@ -6,6 +6,8 @@ import type { FuncComponent } from "~/models/common.types";
 import type { CardProps } from "~/components";
 import { Card, Link } from "~/components";
 
+type CardColors = "primary";
+
 interface Classes {
   card?: string;
   children?: string;
@@ -16,6 +18,7 @@ interface CardLinkProps extends CardProps {
   classes?: Classes;
   uri: string;
   isExternal?: boolean;
+  color?: CardColors;
 }
 
 export const CardLink: FuncComponent<CardLinkProps> = ({
@@ -24,10 +27,26 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
   classes,
   uri,
   isExternal,
+  color,
 }) => {
+  const colorClasses: Record<CardColors, { wrapper: string; button: string }> =
+    {
+      primary: {
+        wrapper: "bg-primary-500",
+        button:
+          "border-white text-white bg-transparent group-hover:bg-white group-hover:border-white",
+      },
+    };
+
   return (
     <Link to={uri} className={className} isExternal={isExternal}>
-      <Card className={clsx(classes?.card, "group flex h-full cursor-pointer")}>
+      <Card
+        className={clsx(
+          classes?.card,
+          "group flex h-full cursor-pointer",
+          color && colorClasses[color].wrapper
+        )}
+      >
         <div
           className={clsx(
             "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
@@ -45,6 +64,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
           <button
             className={clsx(
               "flex h-8 min-h-[2rem] w-8 min-w-[2rem] items-center justify-center rounded-full border-2 border-gray-400 bg-gray-100 text-gray-400 transition-all group-hover:border-primary-500 group-hover:bg-primary-100 group-hover:text-primary-500",
+              color && colorClasses[color].button,
               {
                 "-rotate-45": isExternal,
               }

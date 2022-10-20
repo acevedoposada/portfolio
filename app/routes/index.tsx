@@ -73,12 +73,16 @@ export default function Index() {
       </motion.div>
 
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/resume" classes={{ children: "justify-end" }}>
-          <RiBodyScanFill size={80} className="mb-4 text-primary-500" />
-          <p className="text-sm uppercase tracking-tighter text-gray-500">
+        <CardLink
+          uri="/resume"
+          classes={{ children: "justify-end" }}
+          color="primary"
+        >
+          <RiBodyScanFill size={80} className="mb-4 text-white opacity-90" />
+          <p className="text-sm uppercase tracking-tighter text-white text-opacity-60">
             Learn more about me
           </p>
-          <h4 className="text-[28px] font-semibold leading-none tracking-tight">
+          <h4 className="text-[28px] font-semibold leading-none tracking-tight text-white">
             See my resume
           </h4>
         </CardLink>
@@ -100,6 +104,7 @@ export default function Index() {
         <CardLink
           uri="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
           isExternal
+          color="primary"
           classes={{
             children:
               "flex items-center justify-center pr-8 absolute w-full h-full",
@@ -108,7 +113,7 @@ export default function Index() {
           }}
         >
           <BsLinkedin
-            className="text-primary-700 transition-colors group-hover:text-primary-900"
+            className="text-white transition-colors group-hover:opacity-90"
             size={140}
           />
         </CardLink>
@@ -141,26 +146,30 @@ export default function Index() {
         variants={item}
         className="card-wrapper large-card col-span-2"
       >
-        <CardLink uri="/contact" classes={{ children: "justify-end" }}>
-          <p className="text-sm uppercase tracking-tighter text-gray-500">
+        <CardLink
+          uri="/contact"
+          classes={{ children: "justify-end" }}
+          color="primary"
+        >
+          <p className="text-sm uppercase tracking-tighter text-white opacity-60">
             What I do
           </p>
-          <div className="mt-5 flex flex-col justify-between gap-4 pr-6 md:flex-row md:gap-0">
+          <div className="mt-5 flex flex-col justify-between gap-4 pr-10 md:flex-row md:gap-0">
             <div className="flex items-center md:flex-col">
-              <RiLayoutMasonryLine className="text-[48px] text-primary-500 md:text-[80px]" />
-              <p className="ml-4 text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+              <RiLayoutMasonryLine className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
                 Web
               </p>
             </div>
             <div className="flex items-center md:flex-col">
-              <RiPenNibLine className="text-[48px] text-primary-500 md:text-[80px]" />
-              <p className="ml-4 text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+              <RiPenNibLine className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
                 Visual
               </p>
             </div>
             <div className="flex items-center md:flex-col">
-              <TbPresentation className="text-[48px] text-primary-500 md:text-[80px]" />
-              <p className="ml-4 text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+              <TbPresentation className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
                 Analysis
               </p>
             </div>

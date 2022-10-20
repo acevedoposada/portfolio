@@ -45,8 +45,6 @@ const item = {
 export default function About() {
   const { experiences } = useLoaderData();
 
-  console.log(experiences);
-
   return (
     <GridLayout
       variants={container}
