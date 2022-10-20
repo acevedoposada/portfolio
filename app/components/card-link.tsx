@@ -34,7 +34,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
       primary: {
         wrapper: "!bg-primary-500",
         button:
-          "border-white text-white bg-transparent group-hover:bg-white group-hover:border-white",
+          "!border-white !text-white !bg-transparent group-hover:!bg-white group-hover:!text-primary-500 group-hover:!border-white",
       },
     };
 
