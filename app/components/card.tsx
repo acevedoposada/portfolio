@@ -8,6 +8,13 @@ export interface CardProps {
 
 export const Card: FuncComponent<CardProps> = ({ children, className }) => {
   return (
-    <div className={clsx("rounded-3xl bg-card", className)}>{children}</div>
+    <div
+      className={clsx(
+        "rounded-3xl bg-card shadow-lg shadow-primary-100 transition-shadow hover:shadow-primary-200",
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 };

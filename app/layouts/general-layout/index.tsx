@@ -9,57 +9,17 @@ import type { FuncComponent } from "~/models/common.types";
 import { useGeneralLayout } from "~/controllers/general-layout";
 
 import styles from "./styles.css";
+import {
+  container,
+  item,
+  navbarItemsVariants,
+  navbarVariants,
+  toogleButtonVariants,
+} from "./animations";
+import { Footer } from "~/components";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }];
-};
-
-// Animation variants
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: -20 },
-  show: { opacity: 1, y: 0 },
-};
-
-const navbarVariants = {
-  collapsed: {
-    height: 96,
-    transition: {
-      ease: "easeIn",
-    },
-  },
-  amplified: {
-    height: 490,
-    transition: {
-      ease: "easeOut",
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const navbarItemsVariants = {
-  collapsed: {
-    scale: 0.1,
-    opacity: 0,
-  },
-  amplified: {
-    scale: 1,
-    opacity: 1,
-  },
-};
-
-const toogleButtonVariants = {
-  open: { scale: 1 },
-  close: { scale: 0 },
 };
 
 export const GeneralLayout: FuncComponent = ({ children }) => {
@@ -70,6 +30,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
     <motion.span key={route.label} variants={item}>
       <Link
         to={route.path}
+        onClick={toggleNavbar}
         className={clsx("text-gray-400 transition-all hover:text-gray-600", {
           "text-sky-600 hover:text-sky-600": route.path === location.pathname,
         })}
@@ -87,7 +48,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
         initial="collapsed"
         animate={showNavbar ? "amplified" : "collapsed"}
         className={clsx(
-          "header fixed top-0 right-0 left-0 z-10 flex h-24 flex-col items-center gap-[40px] overflow-hidden bg-sky-100 bg-opacity-40 py-8",
+          "header fixed top-0 right-0 left-0 z-10 flex h-24 flex-col items-center gap-[40px] overflow-hidden bg-sky-100 bg-opacity-40 pt-6 pb-8 md:pt-8",
           {
             "!bg-opacity-80": showNavbar,
           }
@@ -120,7 +81,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
             variants={container}
             initial="hidden"
             animate="show"
-            className="hidden justify-center gap-4 md:flex"
+            className="hidden justify-center gap-4 md:flex md:gap-10"
           >
             {links}
           </motion.div>
@@ -148,7 +109,11 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
                 <HiOutlineX size={25} className="text-secondary-900" />
               </motion.span>
             </motion.button>
-            <Link to="/contact" className="hidden md:block">
+            <Link
+              to="/contact"
+              className="hidden md:block"
+              onClick={toggleNavbar}
+            >
               <motion.button
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -170,7 +135,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
           variants={navbarItemsVariants}
           className="w-8/12 origin-top md:w-7/12"
         >
-          <Link to="/contact">
+          <Link to="/contact" onClick={toggleNavbar}>
             <motion.button
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -182,7 +147,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
         </motion.div>
       </motion.header>
       {title && (
-        <div key={title} className="h-[300px] overflow-hidden">
+        <div key={title} className="overflow-hidden">
           <motion.div
             className="pointer-events-none h-auto"
             animate={{ opacity: 1, y: 0 }}
@@ -196,6 +161,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
         </div>
       )}
       <main className="wrapper pt-5">{children}</main>
+      <Footer />
     </>
   );
 };

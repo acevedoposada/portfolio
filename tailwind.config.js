@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         sans: ["DM Sans", ...defaultTheme.fontFamily.sans],
       },
+      shadow: {
+        sky: "1px 2px 0px #000",
+      },
     },
   },
   plugins: [],
