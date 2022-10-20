@@ -32,7 +32,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
   const colorClasses: Record<CardColors, { wrapper: string; button: string }> =
     {
       primary: {
-        wrapper: "bg-primary-500",
+        wrapper: "!bg-primary-500",
         button:
           "border-white text-white bg-transparent group-hover:bg-white group-hover:border-white",
       },
