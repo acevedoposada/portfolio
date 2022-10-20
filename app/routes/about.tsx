@@ -58,23 +58,23 @@ export default function About() {
       />
       <Card
         variants={item}
-        className="card-wrapper flex flex-col justify-end p-8 pr-14"
+        className="card-wrapper flex flex-col justify-end bg-primary-500 p-8 pr-14"
       >
-        <h1 className="mb-2 text-3xl font-bold leading-snug tracking-tight md:mb-4 md:text-[40px]">
+        <h1 className="mb-2 text-3xl font-bold leading-snug tracking-tight text-white md:mb-4 md:text-[40px]">
           Hey, I'm David 👋🏼
         </h1>
-        <p className="text-lg text-gray-500 md:text-xl">
+        <p className="text-lg text-white md:text-xl">
           A {experiences?.[0]?.title} at {experiences?.[0]?.company}
         </p>
       </Card>
       <Card
         variants={item}
-        className="card-wrapper col-span-1 flex flex-col justify-end p-8 md:col-span-2"
+        className="card-wrapper col-span-1 flex flex-col justify-end p-8 md:col-span-2 lg:bg-primary-500"
       >
-        <h2 className="mb-2 text-[24px] font-bold tracking-tighter md:text-[28px]">
+        <h2 className="mb-2 text-[24px] font-bold tracking-tighter md:text-[28px] md:text-white">
           About me
         </h2>
-        <p className="text-lg leading-6 tracking-tighter text-gray-500 md:text-xl md:leading-7">
+        <p className="text-lg leading-6 tracking-tighter text-gray-500 md:text-xl md:leading-7 lg:text-white lg:text-opacity-80">
           I am a Frontend developer living in Medellin (Colombia) and I
           specialize in web development, requirements analysis and visual
           development. I have worked in multidisciplinary fields, both in large
@@ -144,12 +144,16 @@ export default function About() {
         </CardLink>
       </motion.div>
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/resume" classes={{ children: "justify-end" }}>
-          <RiBodyScanFill size={80} className="mb-4 text-primary-500" />
-          <p className="text-sm uppercase tracking-tighter text-gray-500">
+        <CardLink
+          uri="/resume"
+          classes={{ children: "justify-end" }}
+          color="primary"
+        >
+          <RiBodyScanFill size={80} className="mb-4 text-white opacity-90" />
+          <p className="text-sm uppercase tracking-tighter text-white text-opacity-60">
             Learn more about me
           </p>
-          <h4 className="text-[28px] font-semibold leading-none tracking-tight">
+          <h4 className="text-[28px] font-semibold leading-none tracking-tight text-white">
             See my resume
           </h4>
         </CardLink>
