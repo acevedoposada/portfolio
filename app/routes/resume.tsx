@@ -97,7 +97,7 @@ export default function Resume() {
             </a>
             <span className="block h-[1px] w-full bg-gray-200" />
             <a
-              href="https://www.instagram.com/davidchacevedo_/"
+              href="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
               className="group flex items-center py-4"
             >
               <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500">
@@ -109,7 +109,7 @@ export default function Resume() {
             </a>
             <span className="block h-[1px] w-full bg-gray-200" />
             <a
-              href="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
+              href="https://www.instagram.com/davidchacevedo_/"
               className="group flex items-center pt-4"
             >
               <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500">
