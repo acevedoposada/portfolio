@@ -63,15 +63,15 @@ export default function Resume() {
                 David Acevedo
               </h1>
               <h2 className="text-2xl tracking-tighter text-primary-500">
-                Frontend Dev Senior
+                {experiences?.[0]?.title}
               </h2>
             </div>
             <div>
-              <p className="text-xl text-gray-500">contact@david-acevedo.com</p>
+              <p className="text-xl text-gray-500">hello@david-acevedo.com</p>
             </div>
             <div>
               <a
-                href="mailto:contact@david-acevedo.com"
+                href="mailto:hello@david-acevedo.com"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full border-2 border-secondary-900 py-2 px-4 text-sm font-medium text-secondary-900 transition-all hover:bg-secondary-900 hover:text-white"
@@ -157,7 +157,7 @@ export default function Resume() {
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {exp.title} @ {exp.company}
                 </h4>
-                <p className="text-base text-gray-500">
+                <p className="text-base tracking-tighter text-gray-500">
                   {dayjs(exp.startDate._seconds * 1000).format("MMM YYYY")} -{" "}
                   {exp.dueDate
                     ? dayjs(exp.dueDate._seconds * 1000).format("MMM YYYY")
