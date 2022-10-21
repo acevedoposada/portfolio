@@ -19,12 +19,21 @@ export const loader: LoaderFunction = async () => {
     .collection("resume")
     .where("type", "==", "experience")
     .get();
+
+  const aboutData = await db
+    .collection("resume")
+    .where("type", "==", "about")
+    .get();
   const experiences: any[] = [];
+  let about: any = {};
+
   querySnapshot.forEach((value) => {
     experiences.push(value.data());
   });
 
-  return { experiences: orderBy(experiences, "position") };
+  aboutData.forEach((value) => (about = value.data()));
+
+  return { experiences: orderBy(experiences, "position"), about };
 };
 
 const container = {
@@ -43,7 +52,7 @@ const item = {
 };
 
 export default function About() {
-  const { experiences } = useLoaderData();
+  const { experiences, about } = useLoaderData();
 
   return (
     <GridLayout
@@ -75,10 +84,7 @@ export default function About() {
           About me
         </h2>
         <p className="text-lg leading-6 tracking-tighter text-gray-500 md:text-xl md:leading-7 lg:text-white lg:text-opacity-80">
-          I am a Frontend developer living in Medellin (Colombia) and I
-          specialize in web development, requirements analysis and visual
-          development. I have worked in multidisciplinary fields, both in large
-          and small companies, startups and as a freelancer.
+          {about.description}
         </p>
       </Card>
       <Card

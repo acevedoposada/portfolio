@@ -4,7 +4,7 @@ import clsx from "clsx";
 import type { FuncComponent } from "~/models/common.types";
 
 import type { CardProps } from "~/components";
-import { Card, Link } from "~/components";
+import { Card, Link, IconButton } from "~/components";
 
 type CardColors = "primary";
 
@@ -61,17 +61,13 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
             classes?.iconWrapper
           )}
         >
-          <button
-            className={clsx(
-              "flex h-8 min-h-[2rem] w-8 min-w-[2rem] items-center justify-center rounded-full border-2 border-gray-400 bg-gray-100 text-gray-400 transition-all group-hover:border-primary-500 group-hover:bg-primary-100 group-hover:text-primary-500",
-              color && colorClasses[color].button,
-              {
-                "-rotate-45": isExternal,
-              }
-            )}
+          <IconButton
+            className={clsx(color && colorClasses[color].button, {
+              "-rotate-45": isExternal,
+            })}
           >
             <ImArrowRight2 size={17} />
-          </button>
+          </IconButton>
         </div>
       </Card>
     </Link>
