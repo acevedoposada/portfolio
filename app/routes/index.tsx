@@ -24,6 +24,7 @@ export const loader: LoaderFunction = async () => {
     .where("type", "==", "experience")
     .where("position", "==", 0)
     .get();
+
   let lastExp = {};
   querySnapshot.forEach((value) => {
     lastExp = value.data();

@@ -18,6 +18,7 @@ export const loader: LoaderFunction = async () => {
   const querySnapshot = await db
     .collection("resume")
     .where("type", "==", "experience")
+    .limit(3)
     .get();
 
   const aboutData = await db

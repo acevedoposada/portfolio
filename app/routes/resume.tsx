@@ -42,12 +42,13 @@ export default function Resume() {
   const { resume } = useLoaderData();
 
   const experiences = orderBy(resume.experience, "position");
+  const education = orderBy(resume.education, "position");
 
   return (
     <div className="flex w-full flex-col gap-16 pt-8 lg:flex-row">
       <div className="flex lg:w-[400px] lg:min-w-[400px]">
         <motion.div
-          className="sticky top-[100px] flex w-full flex-col gap-5 self-start md:flex-row lg:flex-col"
+          className="sticky top-[120px] flex w-full flex-col gap-5 self-start md:flex-row lg:flex-col"
           variants={container}
           initial="hidden"
           animate="show"
@@ -69,7 +70,7 @@ export default function Resume() {
             <div>
               <p className="text-xl text-gray-500">hello@david-acevedo.com</p>
             </div>
-            <div>
+            <div className="flex gap-3">
               <a
                 href="mailto:hello@david-acevedo.com"
                 target="_blank"
@@ -77,6 +78,13 @@ export default function Resume() {
                 className="rounded-full border-2 border-secondary-900 py-2 px-4 text-sm font-medium text-secondary-900 transition-all hover:bg-secondary-900 hover:text-white"
               >
                 Contact me
+              </a>
+              <a
+                href="/pdf"
+                // download="David_Acevedo_CV.pdf"
+                className="rounded-full border-2 border-secondary-900 bg-secondary-900 py-2 px-4 text-sm font-medium text-white transition-all hover:border-secondary-800 hover:bg-secondary-800"
+              >
+                Download CV
               </a>
             </div>
           </Card>
@@ -155,8 +163,11 @@ export default function Resume() {
             {experiences.map((exp) => (
               <motion.div key={exp.id} variants={itemSlide}>
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
-                  {exp.title} @ {exp.company}
+                  {exp.title}
                 </h4>
+                <h5 className="text-lg tracking-tighter text-secondary-900">
+                  {exp.company}
+                </h5>
                 <p className="text-base tracking-tighter text-gray-500">
                   {dayjs(exp.startDate._seconds * 1000).format("MMM YYYY")} -{" "}
                   {exp.dueDate
@@ -177,6 +188,27 @@ export default function Resume() {
           >
             Education
           </motion.h2>
+          <div className="flex flex-col gap-8">
+            {education.map((edu) => (
+              <motion.div key={edu.id} variants={itemSlide}>
+                <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
+                  {edu.title}
+                </h4>
+                <h5 className="text-lg tracking-tighter text-secondary-900">
+                  {edu.center}
+                </h5>
+                <p className="text-base tracking-tighter text-gray-500">
+                  {dayjs(edu.startDate._seconds * 1000).format("MMM YYYY")} -{" "}
+                  {edu.dueDate
+                    ? dayjs(edu.dueDate._seconds * 1000).format("MMM YYYY")
+                    : "Present"}
+                </p>
+                <p className="mt-2 text-2xl tracking-tighter text-gray-500 text-opacity-80">
+                  {edu.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col gap-1">
           <motion.h2
@@ -198,9 +230,23 @@ export default function Resume() {
           </div>
         </div>
         <div className="flex flex-col gap-1">
-          <h2 className="text-[28px] font-semibold tracking-tighter">
+          <motion.h2
+            className="text-[28px] font-semibold tracking-tighter"
+            variants={itemSlide}
+          >
             Interests
-          </h2>
+          </motion.h2>
+          <div className="w-full columns-[130px] gap-2 md:w-1/2 md:min-w-[450px] md:columns-[200px]">
+            {resume.skill?.map((skill: any) => (
+              <motion.p
+                key={skill.description}
+                className="mb-2 text-xl font-medium tracking-tighter text-gray-500 text-opacity-80 md:text-2xl"
+                variants={itemSlide}
+              >
+                {skill.description}
+              </motion.p>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
