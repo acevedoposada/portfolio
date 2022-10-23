@@ -81,7 +81,7 @@ export default function Resume() {
               </a>
               <a
                 href="/pdf"
-                // download="David_Acevedo_CV.pdf"
+                download="David_Acevedo_CV.pdf"
                 className="rounded-full border-2 border-secondary-900 bg-secondary-900 py-2 px-4 text-sm font-medium text-white transition-all hover:border-secondary-800 hover:bg-secondary-800"
               >
                 Download CV
@@ -189,8 +189,8 @@ export default function Resume() {
             Education
           </motion.h2>
           <div className="flex flex-col gap-8">
-            {education.map((edu) => (
-              <motion.div key={edu.id} variants={itemSlide}>
+            {education.map((edu, i) => (
+              <motion.div key={i} variants={itemSlide}>
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {edu.title}
                 </h4>
