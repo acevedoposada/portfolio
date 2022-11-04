@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "@remix-run/react";
 
-import appRoutes from "~/utils/routes";
+import { NavigationContext } from "~/context/navigation";
+import { db } from "~/utils/db.server";
 
 export const useGeneralLayout = () => {
   const [title, setTitle] = useState<string | null>(null);
@@ -10,7 +11,7 @@ export const useGeneralLayout = () => {
 
   const location = useLocation();
 
-  const routes = useMemo(() => appRoutes, []);
+  const { routes } = useContext(NavigationContext);
 
   const validateMobileScreen = (): boolean =>
     window.matchMedia("(max-width: 768px)").matches;

@@ -1,9 +1,12 @@
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 import { Link } from "@remix-run/react";
+import { useContext } from "react";
 
-import appRoutes from "~/utils/routes";
+import { NavigationContext } from "~/context/navigation";
 
 export const Footer = () => {
+  const { routes } = useContext(NavigationContext);
+
   return (
     <footer className="flex flex-col items-center pt-20">
       <div className="flex flex-col items-center gap-6 md:flex-row">
@@ -13,17 +16,22 @@ export const Footer = () => {
             <span className="text-3xl leading-none text-sky-500">.</span>
           </h3>
         </Link>
-        <div className="flex gap-6">
-          {appRoutes.map((route, index) => (
-            <Link
-              key={index}
-              to={route.path}
-              className="pt-1 text-gray-500 hover:text-primary-500 hover:underline"
-            >
-              {route.label}
-            </Link>
-          ))}
-        </div>
+        {routes && (
+          <div className="flex gap-6">
+            {routes?.map(
+              (route, index) =>
+                route.enable && (
+                  <Link
+                    key={index}
+                    to={route.path}
+                    className="pt-1 text-gray-500 hover:text-primary-500 hover:underline"
+                  >
+                    {route.label}
+                  </Link>
+                )
+            )}
+          </div>
+        )}
       </div>
       <div className="flex gap-8 pt-6 pb-4">
         <a

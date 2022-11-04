@@ -90,13 +90,13 @@ export default function Index() {
       </motion.div>
 
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/projects/1" classes={{ children: "justify-end" }}>
+        <CardLink uri="/works/1" classes={{ children: "justify-end" }}>
           <h1 className="text-3xl font-bold tracking-tighter">Project #1</h1>
         </CardLink>
       </motion.div>
 
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/projects/1" classes={{ children: "justify-end" }}>
+        <CardLink uri="/works/1" classes={{ children: "justify-end" }}>
           <h1 className="text-3xl font-bold tracking-tighter">Project #2</h1>
         </CardLink>
       </motion.div>
@@ -124,7 +124,7 @@ export default function Index() {
         variants={item}
         className="card-wrapper large-card col-span-2"
       >
-        <CardLink uri="/projects/1" classes={{ children: "justify-end" }}>
+        <CardLink uri="/works/1" classes={{ children: "justify-end" }}>
           <h1 className="text-3xl font-bold tracking-tighter">Project #3</h1>
         </CardLink>
       </motion.div>

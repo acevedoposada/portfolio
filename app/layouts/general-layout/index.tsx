@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 
 import type { FuncComponent } from "~/models/common.types";
-
 import { useGeneralLayout } from "~/controllers/general-layout";
+import { Footer } from "~/components";
 
 import styles from "./styles.css";
 import {
@@ -16,7 +16,6 @@ import {
   navbarVariants,
   toogleButtonVariants,
 } from "./animations";
-import { Footer } from "~/components";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }];
@@ -26,19 +25,21 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
   const { location, routes, title, showNavbar, toggleNavbar } =
     useGeneralLayout();
 
-  const links = routes.map((route) => (
-    <motion.span key={route.label} variants={item}>
-      <Link
-        to={route.path}
-        onClick={toggleNavbar}
-        className={clsx("text-gray-400 transition-all hover:text-gray-600", {
-          "text-sky-600 hover:text-sky-600": route.path === location.pathname,
-        })}
-      >
-        {route.label}
-      </Link>
-    </motion.span>
-  ));
+  const links = routes.map((route) =>
+    route.label && route.enable ? (
+      <motion.span key={route.label} variants={item}>
+        <Link
+          to={route.path}
+          onClick={toggleNavbar}
+          className={clsx("text-gray-400 transition-all hover:text-gray-600", {
+            "text-sky-600 hover:text-sky-600": route.path === location.pathname,
+          })}
+        >
+          {route.label}
+        </Link>
+      </motion.span>
+    ) : null
+  );
 
   return (
     <>
