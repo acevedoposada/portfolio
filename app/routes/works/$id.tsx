@@ -1,5 +1,6 @@
+import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
 
 export const loader: LoaderFunction = ({ params }) => {
   return { id: params.id };
@@ -7,6 +8,12 @@ export const loader: LoaderFunction = ({ params }) => {
 
 export default function ProjectDetails() {
   const { id } = useLoaderData();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/works");
+  }, [navigate]);
 
   return (
     <div>

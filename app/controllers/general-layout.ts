@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "@remix-run/react";
 
 import { NavigationContext } from "~/context/navigation";
-import { db } from "~/utils/db.server";
 
 export const useGeneralLayout = () => {
   const [title, setTitle] = useState<string | null>(null);

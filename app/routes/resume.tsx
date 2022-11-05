@@ -174,9 +174,22 @@ export default function Resume() {
                     ? dayjs(exp.dueDate._seconds * 1000).format("MMM YYYY")
                     : "Present"}
                 </p>
-                <p className="mt-2 text-2xl tracking-tighter text-gray-500 text-opacity-80">
-                  {exp.description}
-                </p>
+                {Array.isArray(exp.description) ? (
+                  <ul className="mt-2 list-disc pl-4">
+                    {exp.description.map((item: string, idx: number) => (
+                      <li
+                        key={idx}
+                        className="text-xl tracking-tighter text-gray-500 text-opacity-80"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-2 text-xl tracking-tighter text-gray-500 text-opacity-80">
+                    {exp.description}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>

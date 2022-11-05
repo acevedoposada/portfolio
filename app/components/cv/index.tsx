@@ -1,7 +1,14 @@
 import type ReactPDF from "@react-pdf/renderer";
-import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Image, Link, Page, Text, View } from "@react-pdf/renderer";
+import dayjs from "dayjs";
 
-import { workingSquare } from "~/assets/img/encoded-images";
+import {
+  documentGlassIcon,
+  githubIcon,
+  instagramIcon,
+  linkedinIcon,
+  workingSquare,
+} from "~/assets/img/encoded-images";
 
 import { registerFonts } from "~/utils/register-fonts";
 
@@ -26,7 +33,7 @@ interface NTextProps extends ReactPDF.TextProps {
 const NText = ({
   style,
   fontWeight = "normal",
-  size,
+  size = 15,
   ...props
 }: NTextProps) => {
   const weights: Record<FontWeight, number> = {
@@ -74,15 +81,41 @@ export const CurriculumDocument = ({ about, experience }: any) => {
             paddingHorizontal: 25,
           }}
         >
-          <View
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 200,
-              overflow: "hidden",
-            }}
-          >
-            <Image src={workingSquare} />
+          <View>
+            <View style={{ position: "relative", height: 100, width: 100 }}>
+              <View
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 200,
+                  overflow: "hidden",
+                  zIndex: 2,
+                  position: "absolute",
+                }}
+              >
+                <Image src={workingSquare} />
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginVertical: 10,
+              }}
+            >
+              <Link src="https://github.com/acevedoposada">
+                <Image src={githubIcon} style={{ width: 12, height: 12 }} />
+              </Link>
+              <Link
+                src="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
+                style={{ marginHorizontal: 8 }}
+              >
+                <Image src={linkedinIcon} style={{ width: 12, height: 12 }} />
+              </Link>
+              <Link src="https://www.instagram.com/davidchacevedo_/">
+                <Image src={instagramIcon} style={{ width: 12, height: 12 }} />
+              </Link>
+            </View>
           </View>
           <View style={{ marginLeft: 30 }}>
             <NText fontWeight="bold" size={30}>
@@ -114,6 +147,86 @@ export const CurriculumDocument = ({ about, experience }: any) => {
               {about.description}
             </NText>
           </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 20,
+            width: "100%",
+            paddingHorizontal: 20,
+          }}
+        >
+          <Image
+            src={documentGlassIcon}
+            style={{ width: 20, minWidth: 20, marginRight: 10 }}
+          />
+          <NText fontWeight="semibold">Employment History</NText>
+        </View>
+        <View
+          style={{
+            alignContent: "flex-start",
+            width: "100%",
+            paddingHorizontal: 35,
+          }}
+        >
+          {experience.map((exp: any, idx: number) => (
+            <View key={idx} style={{ flexDirection: "row", marginBottom: 20 }}>
+              <View style={{ width: 170, paddingTop: 4, paddingLeft: 20 }}>
+                <NText size={8}>
+                  {dayjs(exp.startDate._seconds * 1000).format("MMM YYYY")} -{" "}
+                  {exp.dueDate
+                    ? dayjs(exp.dueDate._seconds * 1000).format("MMM YYYY")
+                    : "Present"}
+                </NText>
+              </View>
+              <View style={{ width: "100%" }}>
+                <NText
+                  size={12}
+                  fontWeight="semibold"
+                  style={{ color: "#0BA5E9" }}
+                >
+                  {exp.title}
+                </NText>
+                <NText size={10} fontWeight="medium" style={{ marginTop: 3 }}>
+                  {exp.company}
+                </NText>
+                {Array.isArray(exp.description) ? (
+                  <View style={{ marginTop: 7 }}>
+                    {exp.description.map((item: string, idx: number) => (
+                      <View key={idx} style={{ flexDirection: "row" }}>
+                        <View
+                          style={{
+                            width: 2,
+                            height: 2,
+                            backgroundColor: "#6b6b6b",
+                            borderRadius: 3,
+                            marginTop: 4.5,
+                            marginRight: 5,
+                          }}
+                        />
+                        <View>
+                          <NText
+                            size={8}
+                            style={{ color: "#6b6b6b", lineHeight: 1.6 }}
+                          >
+                            {item}
+                          </NText>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+                ) : (
+                  <NText
+                    size={8}
+                    style={{ color: "#6b6b6b", marginTop: 5, lineHeight: 1.5 }}
+                  >
+                    {exp.description}
+                  </NText>
+                )}
+              </View>
+            </View>
+          ))}
         </View>
       </Page>
     </Document>
