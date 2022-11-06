@@ -13,12 +13,24 @@ import { CardLink } from "~/components";
 import { GridLayout, links as gridLayoutStyles } from "~/layouts/grid-layout";
 
 import styles from "~/styles/pages/home.css";
+import type { Project } from "~/models/projects.model";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: styles }, ...gridLayoutStyles()];
 };
 
 export const loader: LoaderFunction = async () => {
+  const projectsQs = await db.collection("projects").limit(3).get();
+
+  const projects: Project[] = [];
+
+  await projectsQs.forEach(async (item) => {
+    projects.push({
+      id: item.id,
+      ...(item.data() as Omit<Project, "id">),
+    });
+  });
+
   const querySnapshot = await db
     .collection("resume")
     .where("type", "==", "experience")
@@ -30,7 +42,7 @@ export const loader: LoaderFunction = async () => {
     lastExp = value.data();
   });
 
-  return { lastExp };
+  return { lastExp, projects };
 };
 
 const container = {
@@ -49,7 +61,7 @@ const item = {
 };
 
 export default function Index() {
-  const { lastExp } = useLoaderData();
+  const { lastExp, projects } = useLoaderData();
 
   return (
     <GridLayout variants={container} initial="hidden" animate="show">
@@ -90,14 +102,34 @@ export default function Index() {
       </motion.div>
 
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/works/1" classes={{ children: "justify-end" }}>
-          <h1 className="text-3xl font-bold tracking-tighter">Project #1</h1>
+        <CardLink
+          uri={projects?.[0]?.uri /**`/works/${projects?.[0]?.id}` */}
+          imgSrc={projects?.[0]?.images?.small_logo}
+          classes={{ children: "justify-end" }}
+          isExternal
+        >
+          <h5 className="mb-2 text-base uppercase text-gray-400">
+            {projects?.[0]?.category}
+          </h5>
+          <h3 className="text-3xl font-bold tracking-tighter">
+            {projects?.[0]?.title}
+          </h3>
         </CardLink>
       </motion.div>
 
       <motion.div variants={item} className="card-wrapper">
-        <CardLink uri="/works/1" classes={{ children: "justify-end" }}>
-          <h1 className="text-3xl font-bold tracking-tighter">Project #2</h1>
+        <CardLink
+          uri={projects?.[1]?.uri /**`/works/${projects?.[1]?.id}` */}
+          imgSrc={projects?.[1]?.images?.small_logo}
+          classes={{ children: "justify-end" }}
+          isExternal
+        >
+          <h5 className="mb-2 text-base uppercase text-gray-400">
+            {projects?.[1]?.category}
+          </h5>
+          <h3 className="text-3xl font-bold tracking-tighter">
+            {projects?.[1]?.title}
+          </h3>
         </CardLink>
       </motion.div>
 

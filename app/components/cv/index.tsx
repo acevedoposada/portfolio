@@ -3,6 +3,7 @@ import { Document, Image, Link, Page, Text, View } from "@react-pdf/renderer";
 import dayjs from "dayjs";
 
 import {
+  activityGlassIcon,
   documentGlassIcon,
   githubIcon,
   instagramIcon,
@@ -227,6 +228,22 @@ export const CurriculumDocument = ({ about, experience }: any) => {
               </View>
             </View>
           ))}
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 20,
+            marginTop: 50,
+            width: "100%",
+            paddingHorizontal: 28,
+          }}
+        >
+          <Image
+            src={activityGlassIcon}
+            style={{ width: 20, minWidth: 20, marginRight: 10 }}
+          />
+          <NText fontWeight="semibold">Education</NText>
         </View>
       </Page>
     </Document>

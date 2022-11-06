@@ -19,6 +19,7 @@ interface CardLinkProps extends CardProps {
   uri: string;
   isExternal?: boolean;
   color?: CardColors;
+  imgSrc?: string;
 }
 
 export const CardLink: FuncComponent<CardLinkProps> = ({
@@ -28,6 +29,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
   uri,
   isExternal,
   color,
+  imgSrc,
 }) => {
   const colorClasses: Record<CardColors, { wrapper: string; button: string }> =
     {
@@ -43,31 +45,40 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
       <Card
         className={clsx(
           classes?.card,
-          "group flex h-full cursor-pointer",
+          "group flex h-full cursor-pointer flex-col overflow-hidden",
           color && colorClasses[color].wrapper
         )}
       >
-        <div
-          className={clsx(
-            "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
-            classes?.children
-          )}
-        >
-          {children}
-        </div>
-        <div
-          className={clsx(
-            "flex items-end pl-2 pr-5 pb-5 md:pr-8 md:pl-2 md:pb-8",
-            classes?.iconWrapper
-          )}
-        >
-          <IconButton
-            className={clsx(color && colorClasses[color].button, {
-              "-rotate-45": isExternal,
-            })}
+        {imgSrc && (
+          <img
+            className="h-full max-h-[50%] bg-center object-cover"
+            alt=""
+            src={imgSrc}
+          />
+        )}
+        <div className="flex h-full w-full">
+          <div
+            className={clsx(
+              "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
+              classes?.children
+            )}
           >
-            <ImArrowRight2 size={17} />
-          </IconButton>
+            {children}
+          </div>
+          <div
+            className={clsx(
+              "flex items-end pl-2 pr-5 pb-5 md:pr-8 md:pl-2 md:pb-8",
+              classes?.iconWrapper
+            )}
+          >
+            <IconButton
+              className={clsx(color && colorClasses[color].button, {
+                "-rotate-45": isExternal,
+              })}
+            >
+              <ImArrowRight2 size={17} />
+            </IconButton>
+          </div>
         </div>
       </Card>
     </Link>

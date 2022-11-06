@@ -1,6 +1,7 @@
 import admin from "firebase-admin";
 import { initializeApp as initializeAdminApp } from "firebase-admin/app";
 import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
 const { privateKey } = JSON.parse(
   process.env.GOOGLE_PRIVATE_KEY || "{ privateKey: null }"
@@ -34,5 +35,6 @@ let Firebase: any;
 if (!Firebase?.apps?.length) {
   Firebase = initializeApp(firebaseConfig);
 }
+const storage = getStorage(Firebase);
 
-export { db };
+export { db, storage };
