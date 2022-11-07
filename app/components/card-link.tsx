@@ -60,7 +60,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
         <div className="flex h-full w-full">
           <div
             className={clsx(
-              "flex h-full w-full flex-col pb-5 pl-5 md:py-8 md:pl-8",
+              "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
               classes?.children
             )}
           >
