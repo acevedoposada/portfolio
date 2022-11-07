@@ -1,0 +1,32 @@
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.content {}
+
+.title {
+  font-size: clamp(0px, 22vw, 320px);
+  letter-spacing: -0.05em;
+}
+
+@media (min-width: 1400px) {
+  .wrapper {
+    width: 1400px;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .wrapper {
+    width: 100%;
+    padding: 10px 40px 80px;
+  }
+}
+
+@media (max-width: 809px) {
+  .wrapper {
+    width: 100%;
+    min-width: auto;
+    padding: 0 20px;
+  }
+}

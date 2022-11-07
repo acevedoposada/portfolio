@@ -1,4 +1,8 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -6,14 +10,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/tailwind.css";
-import globalStyles from "./styles/global.css";
 import {
   GeneralLayout,
   links as generalLayoutStyles,
-} from "~/components/general-layout";
+} from "~/layouts/general-layout";
+
+import tailwindStylesheetUrl from "./styles/tailwind.css";
+import globalStyles from "./styles/global.css";
+import { NavigationContext } from "./context/navigation";
+import { db } from "./utils/db.server";
+import type { Navigation } from "./utils/routes";
+import { orderBy } from "lodash";
 
 export const links: LinksFunction = () => {
   return [
@@ -23,6 +33,21 @@ export const links: LinksFunction = () => {
   ];
 };
 
+export const loader: LoaderFunction = async () => {
+  const querySnapshot = await db.collection("navigation").get();
+
+  const routes: Navigation[] = [];
+
+  querySnapshot.forEach((item) =>
+    routes.push({
+      id: item.id,
+      ...(item.data() as Omit<Navigation, "id">),
+    })
+  );
+
+  return { routes: orderBy(routes, "order") };
+};
+
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "David Acevedo | Portfolio",
@@ -30,18 +55,23 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const { routes } = useLoaderData();
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body className="bg-sky-100">
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
+      <NavigationContext.Provider value={{ routes }}>
+        <body className="bg-sky-100">
+          <GeneralLayout>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </GeneralLayout>
+        </body>
+      </NavigationContext.Provider>
     </html>
   );
 }

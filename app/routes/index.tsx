@@ -1,159 +1,224 @@
-import type { LinksFunction } from "@remix-run/node";
-import { useEffect, useState } from "react";
-import { HiPlus } from "react-icons/hi";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { RiLayoutMasonryLine, RiPenNibLine } from "react-icons/ri";
+import { useLoaderData } from "@remix-run/react";
+import { RiBodyScanFill } from "react-icons/ri";
+import { TbPresentation } from "react-icons/tb";
+import { BsLinkedin } from "react-icons/bs";
 import { motion } from "framer-motion";
-import Lottie from "react-lottie";
-import clsx from "clsx";
 
-import styles from "~/styles/pages/index.css";
+import { db } from "~/utils/db.server";
 
-import workingImg from "~/assets/images/working.webp";
-import background from "~/assets/images/background-wip.webp";
-import animationData from "~/assets/lottie/fireworks-shine.json";
+import { CardLink } from "~/components";
+
+import { GridLayout, links as gridLayoutStyles } from "~/layouts/grid-layout";
+
+import styles from "~/styles/pages/home.css";
+import type { Project } from "~/models/projects.model";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: "stylesheet", href: styles }, ...gridLayoutStyles()];
+};
+
+export const loader: LoaderFunction = async () => {
+  const projectsQs = await db.collection("projects").limit(3).get();
+
+  const projects: Project[] = [];
+
+  await projectsQs.forEach(async (item) => {
+    projects.push({
+      id: item.id,
+      ...(item.data() as Omit<Project, "id">),
+    });
+  });
+
+  const querySnapshot = await db
+    .collection("resume")
+    .where("type", "==", "experience")
+    .where("position", "==", 0)
+    .get();
+
+  let lastExp = {};
+  querySnapshot.forEach((value) => {
+    lastExp = value.data();
+  });
+
+  return { lastExp, projects };
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const item = {
+  hidden: { scale: 0.5, opacity: 0 },
+  show: { scale: 1, opacity: 1 },
 };
 
 export default function Index() {
-  const [showAnimation, setShowAnimation] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAnimation(true);
-      clearTimeout(timer);
-    }, 300);
-  }, []);
+  const { lastExp, projects } = useLoaderData();
 
   return (
-    <main className="absolute flex h-full w-full flex-col items-center justify-center gap-5 overflow-hidden bg-sky-300">
-      <img
-        src={background}
-        alt="background"
-        className="h-full w-full bg-left object-cover"
-      />
-      <div className="glass absolute h-full w-full" />
-
-      <div className="absolute flex h-full w-full flex-col items-center justify-center">
-        <div className="relative h-[250px] w-[250px] md:h-[400px] md:w-[400px]">
-          <motion.div
-            className="absolute top-3 right-3 z-10 md:top-8 md:right-8"
+    <GridLayout variants={container} initial="hidden" animate="show">
+      <motion.div variants={item} className="card-wrapper col-span-2">
+        <CardLink uri="/about" classes={{ children: "justify-between" }}>
+          <motion.img
+            className="h-[90px] w-[90px] md:h-[100px] md:w-[100px]"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <motion.div
-              layout
-              initial={{ borderRadius: 30 }}
-              className={clsx("content-wrapper shadow-lg", {
-                "mr-[-62px] md:mr-[-32px]": isOpen,
-              })}
-              data-isOpen={isOpen}
-            >
-              <div className="relative">
-                {isOpen && (
-                  <div className="w-full py-2 pl-2">
-                    <h1 className="mb-2 font-semibold text-indigo-900">
-                      Who I am?
-                    </h1>
-                    <p className="text-lg text-black">
-                      My name is{" "}
-                      <b className="text-indigo-900">David Acevedo 😁</b> and
-                      I'm Frontend Developer. I love so much the animations,
-                      creative sites and micro-interactions. <br />
-                      Thanks for visit my site, I'm working in more features! 🫣
-                      <br />
-                    </p>
-                  </div>
-                )}
-                <motion.div
-                  onClick={() => setIsOpen(!isOpen)}
-                  layout
-                  className={clsx(
-                    "absolute flex h-14 w-14 cursor-pointer items-center justify-center rounded-full",
-                    {
-                      "-top-2 -right-2": isOpen,
-                    }
-                  )}
-                >
-                  <HiPlus
-                    className={clsx("transition-all", {
-                      "rotate-45": isOpen,
-                      "text-black": isOpen,
-                    })}
-                  />
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
-          <motion.div
-            className="absolute z-[2] h-full w-full overflow-hidden rounded-full border-4 shadow-lg"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", bounce: 0.6 }}
-          >
-            <motion.img
-              className="h-full w-full object-cover"
-              src={workingImg}
-              initial={{ scale: 1.8 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "tween" }}
-            />
-          </motion.div>
-          {showAnimation && (
-            <div className="animation pointer-events-none absolute top-1/2 left-1/2 z-[1] h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 cursor-default select-none opacity-60 md:h-[850px] md:w-[850px]">
-              <Lottie
-                height="100%"
-                width="100%"
-                options={{
-                  autoplay: true,
-                  loop: false,
-                  animationData: animationData,
-                }}
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="mt-4 overflow-hidden py-2">
-          <motion.h1
-            className="text-center text-3xl font-semibold text-white md:text-5xl"
-            initial={{ y: 80 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            Site on construction
-          </motion.h1>
-        </div>
-        <div className="mt-5 flex flex-col items-center gap-1 md:mt-8 md:gap-2">
-          <div className="-mt-2 overflow-hidden pt-2">
-            <motion.p
-              className="text-white opacity-70"
-              initial={{ y: 70, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7 }}
-            >
-              At this moment you can
-            </motion.p>
+            transition={{ type: "spring", bounce: 0.7 }}
+            src="/assets/avatar.png"
+          />
+          <div>
+            <h1 className="mb-2 text-3xl font-bold tracking-tight md:mb-4 md:text-[44px]">
+              Hey, I'm David 👋🏼
+            </h1>
+            <p className="text-gray-500 md:text-xl">
+              A {lastExp.title} at {lastExp.company}
+            </p>
           </div>
-          <motion.a
-            href="/assets/Cristian_David_Acevedo_Posada_-_Semi_Senior_Frontend_Developer.pdf"
-            download="Cristian_David_Acevedo_Posada_-_Semi_Senior_Frontend_Developer.pdf"
-            className="cursor-pointer rounded-md bg-sky-400 px-6 py-3 text-2xl font-semibold text-white shadow-lg hover:bg-sky-500"
-            initial={{ scale: 0 }}
-            animate={{ scale: 0.6 }}
-            transition={{
-              type: "spring",
-              bounce: 0.25,
-              delay: 1.1,
-              duration: 0.5,
-            }}
-          >
-            Download CV
-          </motion.a>
-        </div>
-      </div>
-    </main>
+        </CardLink>
+      </motion.div>
+
+      <motion.div variants={item} className="card-wrapper">
+        <CardLink
+          uri="/resume"
+          classes={{ children: "justify-end" }}
+          color="primary"
+        >
+          <RiBodyScanFill size={80} className="mb-4 text-white opacity-90" />
+          <p className="text-sm uppercase tracking-tighter text-white text-opacity-60">
+            Learn more about me
+          </p>
+          <h4 className="text-[28px] font-semibold leading-none tracking-tight text-white">
+            See my resume
+          </h4>
+        </CardLink>
+      </motion.div>
+
+      <motion.div variants={item} className="card-wrapper">
+        <CardLink
+          uri={projects?.[0]?.uri /**`/works/${projects?.[0]?.id}` */}
+          imgSrc={projects?.[0]?.images?.small_logo}
+          classes={{ children: "justify-end" }}
+          isExternal
+        >
+          <h5 className="mb-2 text-base uppercase text-gray-400">
+            {projects?.[0]?.category}
+          </h5>
+          <h3 className="text-3xl font-bold tracking-tighter">
+            {projects?.[0]?.title}
+          </h3>
+        </CardLink>
+      </motion.div>
+
+      <motion.div variants={item} className="card-wrapper">
+        <CardLink
+          classes={{ children: "justify-end" }}
+          uri={projects?.[1]?.uri /**`/works/${projects?.[1]?.id}` */}
+          imgSrc={projects?.[1]?.images?.small_logo}
+          isExternal
+        >
+          <h5 className="mb-2 text-base uppercase text-gray-400">
+            {projects?.[1]?.category}
+          </h5>
+          <h3 className="text-3xl font-bold tracking-tighter">
+            {projects?.[1]?.title}
+          </h3>
+        </CardLink>
+      </motion.div>
+
+      <motion.div variants={item} className="card-wrapper">
+        <CardLink
+          uri="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
+          isExternal
+          color="primary"
+          classes={{
+            children:
+              "flex items-center justify-center pr-8 absolute w-full h-full",
+            card: "relative",
+            iconWrapper: "pl-0 md:pl-0 ml-auto",
+          }}
+        >
+          <BsLinkedin
+            className="text-white transition-colors group-hover:opacity-90"
+            size={140}
+          />
+        </CardLink>
+      </motion.div>
+
+      <motion.div
+        variants={item}
+        className="card-wrapper large-card col-span-2"
+      >
+        <CardLink
+          uri={projects?.[2]?.uri /**`/works/${projects?.[2]?.id}` */}
+          imgSrc={projects?.[2]?.images?.portrait_logo}
+          isExternal
+          classes={{ children: "justify-end" }}
+        >
+          <h5 className="mb-2 text-base uppercase text-gray-400">
+            {projects?.[2]?.category}
+          </h5>
+          <h3 className="text-3xl font-bold tracking-tighter">
+            {projects?.[2]?.title}
+          </h3>
+        </CardLink>
+      </motion.div>
+
+      <motion.div
+        variants={item}
+        className="card-wrapper large-card col-span-2"
+      >
+        <CardLink uri="/contact" classes={{ children: "justify-end" }}>
+          <p className="text-2xl font-medium tracking-tighter md:text-[28px]">
+            Let's work together ✨
+          </p>
+          <h2 className="text-5xl font-bold leading-none tracking-tighter text-primary-500 md:text-[56px]">
+            Get in touch now
+          </h2>
+        </CardLink>
+      </motion.div>
+
+      <motion.div
+        variants={item}
+        className="card-wrapper large-card col-span-2"
+      >
+        <CardLink
+          uri="/contact"
+          classes={{ children: "justify-end" }}
+          color="primary"
+        >
+          <p className="text-sm uppercase tracking-tighter text-white opacity-60">
+            What I do
+          </p>
+          <div className="mt-5 flex flex-col justify-between gap-4 pr-10 md:flex-row md:gap-0">
+            <div className="flex items-center md:flex-col">
+              <RiLayoutMasonryLine className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
+                Web
+              </p>
+            </div>
+            <div className="flex items-center md:flex-col">
+              <RiPenNibLine className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
+                Visual
+              </p>
+            </div>
+            <div className="flex items-center md:flex-col">
+              <TbPresentation className="text-[48px] text-white opacity-90 md:text-[80px]" />
+              <p className="ml-4 text-xl font-medium tracking-tighter text-white md:mt-2 md:text-2xl">
+                Analysis
+              </p>
+            </div>
+          </div>
+        </CardLink>
+      </motion.div>
+    </GridLayout>
   );
 }

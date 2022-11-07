@@ -1,21 +1,19 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "@remix-run/react";
+
+import { NavigationContext } from "~/context/navigation";
 
 export const useGeneralLayout = () => {
   const [title, setTitle] = useState<string | null>(null);
+  const [showNavbar, setShowNavbar] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const location = useLocation();
 
-  const routes = useMemo(
-    () => [
-      { path: "/", label: "Home", title: null },
-      { path: "/works", label: "Works", title: "All Works" },
-      { path: "/about", label: "About", title: "About Me" },
-      { path: "/resume", label: "Resume", title: null },
-      { path: "/blog", label: "Blog", title: null },
-    ],
-    []
-  );
+  const { routes } = useContext(NavigationContext);
+
+  const validateMobileScreen = (): boolean =>
+    window.matchMedia("(max-width: 768px)").matches;
 
   useEffect(() => {
     const currentRoute = routes.find(
@@ -26,5 +24,21 @@ export const useGeneralLayout = () => {
     }
   }, [location.pathname, routes]);
 
-  return { title, routes, location };
+  useEffect(() => {
+    setIsMobile(validateMobileScreen());
+
+    window.addEventListener("resize", () => {
+      if (!validateMobileScreen()) {
+        setShowNavbar(false);
+        setIsMobile(false);
+      } else {
+        setIsMobile(true);
+      }
+    });
+    return () => window.removeEventListener("resize", () => {});
+  }, []);
+
+  const toggleNavbar = () => isMobile && setShowNavbar(!showNavbar);
+
+  return { title, routes, location, showNavbar, toggleNavbar, isMobile };
 };

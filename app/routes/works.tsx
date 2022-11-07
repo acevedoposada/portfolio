@@ -1,16 +1,5 @@
-import type { LinksFunction } from "@remix-run/node";
-
-import styles from "~/styles/pages/works.css";
-
-export const links: LinksFunction = () => {
-  return [
-    {
-      rel: "stylesheet",
-      href: styles,
-    },
-  ];
-};
+import { Outlet } from "@remix-run/react";
 
 export default function Works() {
-  return <div>Works</div>;
+  return <Outlet />;
 }

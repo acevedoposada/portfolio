@@ -1,0 +1,7 @@
+.card-wrapper {
+  height: 280px;
+}
+
+.card-image {
+  background-image: url('/assets/working.webp');
+}
