@@ -60,7 +60,7 @@ export const Footer = () => {
         </a>
       </div>
       <div className="py-4 text-gray-400">
-        <span>© {new Date().getFullYear()} Portfolio</span>
+        <span>© {new Date().getFullYear()} Portfolio. v1.0.0</span>
       </div>
     </footer>
   );
