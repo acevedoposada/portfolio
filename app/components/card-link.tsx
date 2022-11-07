@@ -10,6 +10,7 @@ type CardColors = "primary";
 
 interface Classes {
   card?: string;
+  image?: string;
   children?: string;
   iconWrapper?: string;
 }
@@ -51,7 +52,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
       >
         {imgSrc && (
           <img
-            className="h-full max-h-[50%] bg-center object-cover"
+            className="h-full max-h-[60%] bg-center object-cover"
             alt=""
             src={imgSrc}
           />
@@ -59,7 +60,7 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
         <div className="flex h-full w-full">
           <div
             className={clsx(
-              "flex h-full w-full flex-col py-5 pl-5 md:py-8 md:pl-8",
+              "flex h-full w-full flex-col pb-5 pl-5 md:py-8 md:pl-8",
               classes?.children
             )}
           >
