@@ -9,6 +9,8 @@ import {
   instagramIcon,
   linkedinIcon,
   workingSquare,
+  gameGlassIcon,
+  starGlassIcon,
 } from "~/assets/img/encoded-images";
 
 import { registerFonts } from "~/utils/register-fonts";
@@ -64,7 +66,13 @@ const NText = ({
   return <Text style={styles} {...props} />;
 };
 
-export const CurriculumDocument = ({ about, experience }: any) => {
+export const CurriculumDocument = ({
+  about,
+  experience,
+  education,
+  skill,
+  interest,
+}: any) => {
   return (
     <Document>
       <Page
@@ -244,6 +252,151 @@ export const CurriculumDocument = ({ about, experience }: any) => {
             style={{ width: 20, minWidth: 20, marginRight: 10 }}
           />
           <NText fontWeight="semibold">Education</NText>
+        </View>
+        <View
+          style={{
+            alignContent: "flex-start",
+            width: "100%",
+            paddingHorizontal: 35,
+          }}
+        >
+          {education.map((exp: any, idx: number) => (
+            <View key={idx} style={{ flexDirection: "row", marginBottom: 20 }}>
+              <View style={{ width: 170, paddingTop: 4, paddingLeft: 20 }}>
+                <NText size={8}>
+                  {dayjs(exp.startDate._seconds * 1000).format("MMM YYYY")} -{" "}
+                  {exp.dueDate
+                    ? dayjs(exp.dueDate._seconds * 1000).format("MMM YYYY")
+                    : "Present"}
+                </NText>
+              </View>
+              <View style={{ width: "100%" }}>
+                <NText
+                  size={12}
+                  fontWeight="semibold"
+                  style={{ color: "#0BA5E9" }}
+                >
+                  {exp.title}
+                </NText>
+                <NText
+                  size={10}
+                  fontWeight="medium"
+                  style={{ marginTop: 5, lineHeight: 1.4 }}
+                >
+                  {exp.center}
+                </NText>
+                {Array.isArray(exp.description) ? (
+                  <View style={{ marginTop: 7 }}>
+                    {exp.description.map((item: string, idx: number) => (
+                      <View key={idx} style={{ flexDirection: "row" }}>
+                        <View
+                          style={{
+                            width: 2,
+                            height: 2,
+                            backgroundColor: "#6b6b6b",
+                            borderRadius: 3,
+                            marginTop: 4.5,
+                            marginRight: 5,
+                          }}
+                        />
+                        <View>
+                          <NText
+                            size={8}
+                            style={{ color: "#6b6b6b", lineHeight: 1.6 }}
+                          >
+                            {item}
+                          </NText>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+                ) : (
+                  <NText
+                    size={8}
+                    style={{ color: "#6b6b6b", marginTop: 5, lineHeight: 1.5 }}
+                  >
+                    {exp.description}
+                  </NText>
+                )}
+              </View>
+            </View>
+          ))}
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-start",
+            width: "100%",
+            marginTop: 30,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 20,
+              width: 225,
+              paddingHorizontal: 28,
+            }}
+          >
+            <Image
+              src={starGlassIcon}
+              style={{ width: 25, minWidth: 25, marginRight: 10 }}
+            />
+            <NText fontWeight="semibold">Skills</NText>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              paddingTop: 5,
+            }}
+          >
+            {skill.map((item: any, idx: number) => (
+              <View key={idx} style={{ width: "40%", marginBottom: 10 }}>
+                <NText size={12}>{item.description}</NText>
+              </View>
+            ))}
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-start",
+            width: "100%",
+            marginTop: 30,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 20,
+              width: 225,
+              paddingHorizontal: 28,
+            }}
+          >
+            <Image
+              src={gameGlassIcon}
+              style={{ width: 25, minWidth: 25, marginRight: 10 }}
+            />
+            <NText fontWeight="semibold">Hobbies</NText>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              paddingTop: 5,
+            }}
+          >
+            {interest.map((item: any, idx: number) => (
+              <View key={idx} style={{ width: "40%", marginBottom: 10 }}>
+                <NText size={12}>{item.description}</NText>
+              </View>
+            ))}
+          </View>
         </View>
       </Page>
     </Document>
