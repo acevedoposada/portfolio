@@ -17,7 +17,7 @@ export const links: LinksFunction = () => {
 export default function Works() {
   return (
     <div className="mx-auto min-h-screen w-full text-center md:w-1/2">
-      <div className="w-full md:-mt-40">
+      <div className="w-full">
         <Lottie
           options={{
             loop: true,
