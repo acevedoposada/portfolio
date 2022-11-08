@@ -67,7 +67,7 @@ export default function ProjectDetails() {
           animate={{ scale: 1, rotateZ: 0, rotateX: -5 }}
         >
           <img
-            className="h-full object-cover"
+            className="h-full w-full object-cover"
             src={project.images.portrait_logo}
             alt="portrait"
           />
