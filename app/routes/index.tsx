@@ -103,10 +103,9 @@ export default function Index() {
 
       <motion.div variants={item} className="card-wrapper">
         <CardLink
-          uri={projects?.[0]?.uri /**`/works/${projects?.[0]?.id}` */}
+          uri={`/works/${projects?.[0]?.id}`}
           imgSrc={projects?.[0]?.images?.small_logo}
           classes={{ children: "justify-end" }}
-          isExternal
         >
           <h5 className="mb-2 text-base uppercase text-gray-400">
             {projects?.[0]?.category}
@@ -120,9 +119,8 @@ export default function Index() {
       <motion.div variants={item} className="card-wrapper">
         <CardLink
           classes={{ children: "justify-end" }}
-          uri={projects?.[1]?.uri /**`/works/${projects?.[1]?.id}` */}
+          uri={`/works/${projects?.[1]?.id}`}
           imgSrc={projects?.[1]?.images?.small_logo}
-          isExternal
         >
           <h5 className="mb-2 text-base uppercase text-gray-400">
             {projects?.[1]?.category}
@@ -157,9 +155,8 @@ export default function Index() {
         className="card-wrapper large-card col-span-2"
       >
         <CardLink
-          uri={projects?.[2]?.uri /**`/works/${projects?.[2]?.id}` */}
+          uri={`/works/${projects?.[2]?.id}`}
           imgSrc={projects?.[2]?.images?.portrait_logo}
-          isExternal
           classes={{ children: "justify-end" }}
         >
           <h5 className="mb-2 text-base uppercase text-gray-400">
