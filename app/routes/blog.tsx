@@ -1,6 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import Lottie from "react-lottie";
 
+import animationData from "~/assets/lottie/working.json";
 import { db } from "~/utils/db.server";
 
 import blogStyles from "~/styles/pages/blog.css";
@@ -24,14 +25,25 @@ export const loader = () => {
 };
 
 export default function Blog() {
-  const data = useLoaderData();
+  // const data = useLoaderData();
 
   return (
-    <div>
-      <h1 className="text-[56px]">Blog</h1>
-      {data.map((element: any) => (
-        <div key={element.id}>{element.title}</div>
-      ))}
+    <div className="mx-auto min-h-screen text-center md:w-1/2">
+      <Lottie
+        options={{
+          loop: true,
+          autoplay: true,
+          animationData: animationData,
+          rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+          },
+        }}
+        height="100%"
+        width="100%"
+      />
+      <h1 className="-mt-10 text-3xl font-medium tracking-tighter text-cyan-900 md:-mt-24">
+        Woking on this page
+      </h1>
     </div>
   );
 }

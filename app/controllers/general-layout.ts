@@ -22,7 +22,7 @@ export const useGeneralLayout = () => {
     if (currentRoute) {
       setTitle(currentRoute.title);
     }
-  }, [location.pathname, routes]);
+  }, [location, routes]);
 
   useEffect(() => {
     setIsMobile(validateMobileScreen());
