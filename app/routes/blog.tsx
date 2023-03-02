@@ -1,7 +1,4 @@
 import type { LinksFunction } from "@remix-run/node";
-import Lottie from "react-lottie";
-
-import animationData from "~/assets/lottie/working.json";
 import { db } from "~/utils/db.server";
 
 import blogStyles from "~/styles/pages/blog.css";
@@ -28,20 +25,15 @@ export default function Blog() {
   // const data = useLoaderData();
 
   return (
-    <div className="mx-auto min-h-screen text-center md:w-1/2">
-      <Lottie
-        options={{
-          loop: true,
-          autoplay: true,
-          animationData: animationData,
-          rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice",
-          },
-        }}
-        height="100%"
-        width="100%"
+    <div className="blog__content mx-auto -mt-5 flex flex-col items-center justify-center md:w-1/2">
+      <img
+        src="/assets/memoji-working.png"
+        alt=""
+        width="400"
+        height="400"
+        className="select-none"
       />
-      <h1 className="-mt-10 text-3xl font-medium tracking-tighter text-cyan-900 md:-mt-24">
+      <h1 className="mt-6 text-3xl font-medium tracking-tighter text-cyan-900">
         Woking on this page
       </h1>
     </div>

@@ -1,3 +1,4 @@
+import { orderBy } from "lodash";
 import type {
   LinksFunction,
   LoaderFunction,
@@ -17,13 +18,12 @@ import {
   GeneralLayout,
   links as generalLayoutStyles,
 } from "~/layouts/general-layout";
-
-import tailwindStylesheetUrl from "./styles/tailwind.css";
-import globalStyles from "./styles/global.css";
-import { NavigationContext } from "./context/navigation";
-import { db } from "./utils/db.server";
-import type { Navigation } from "./utils/routes";
-import { orderBy } from "lodash";
+import tailwindStylesheetUrl from "~/styles/tailwind.css";
+import { NavigationContext } from "~/context/navigation";
+import GlobalLoading from "~/components/global-loading";
+import type { Navigation } from "~/utils/routes";
+import globalStyles from "~/styles/global.css";
+import { db } from "~/utils/db.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -64,6 +64,7 @@ export default function App() {
       </head>
       <NavigationContext.Provider value={{ routes }}>
         <body className="bg-sky-100">
+          <GlobalLoading />
           <GeneralLayout>
             <Outlet />
             <ScrollRestoration />
