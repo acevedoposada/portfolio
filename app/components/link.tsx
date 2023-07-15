@@ -7,8 +7,8 @@ interface LinkProps extends RemixLinkProps {
   isExternal?: boolean;
 }
 
-export const Link: FuncComponent<LinkProps> = (props) => {
-  const { isExternal, to, children, className } = props;
+export const Link: FuncComponent<LinkProps> = ({ isExternal, ...props }) => {
+  const { to, children, className } = props;
   if (isExternal)
     return (
       <a

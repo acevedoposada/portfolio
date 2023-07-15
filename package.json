@@ -45,7 +45,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-lottie": "^1.2.3",
-    "remix-image": "^1.4.0"
+    "react-preload-image": "^1.0.7"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.7.2",

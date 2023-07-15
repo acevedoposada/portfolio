@@ -1,4 +1,5 @@
 import { ImArrowRight2 } from "react-icons/im";
+import PreloadImage from "react-preload-image";
 import clsx from "clsx";
 
 import type { FuncComponent } from "~/models/common.types";
@@ -51,10 +52,13 @@ export const CardLink: FuncComponent<CardLinkProps> = ({
         )}
       >
         {imgSrc && (
-          <img
-            className="h-full max-h-[60%] bg-center object-cover"
+          <PreloadImage
+            className="relative h-full max-h-[60%] min-h-[60%] min-w-full bg-center object-cover"
             alt=""
             src={imgSrc}
+            width={400}
+            height={200}
+            lazy
           />
         )}
         <div className="flex h-full w-full">
