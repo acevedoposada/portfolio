@@ -63,8 +63,8 @@ export default function ProjectDetails() {
       {project.images.portrait_logo && (
         <motion.div
           className="h-32 overflow-hidden rounded-3xl bg-primary-200 md:h-[426px]"
-          initial={{ scale: 0.6, rotateZ: -10, rotateX: -5 }}
-          animate={{ scale: 1, rotateZ: 0, rotateX: -5 }}
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
         >
           <img
             className="h-full w-full object-cover"
