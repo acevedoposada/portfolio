@@ -11,7 +11,7 @@ export const Footer = () => {
     <footer className="flex flex-col items-center pt-20">
       <div className="flex flex-col items-center gap-6 md:flex-row">
         <Link to="/">
-          <h3 className="pointer-events-none -mt-1 select-none whitespace-nowrap text-xl font-bold leading-none text-cyan-900">
+          <h3 className="pointer-events-none -mt-1 select-none whitespace-nowrap text-xl font-bold leading-none text-cyan-900 dark:text-secondary-700">
             David Acevedo
             <span className="text-3xl leading-none text-sky-500">.</span>
           </h3>

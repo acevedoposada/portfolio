@@ -75,10 +75,10 @@ export default function Index() {
             src="/assets/avatar.png"
           />
           <div>
-            <h1 className="mb-2 text-3xl font-bold tracking-tight md:mb-4 md:text-[44px]">
+            <h1 className="mb-2 text-3xl font-bold tracking-tight dark:text-white md:mb-4 md:text-[44px]">
               Hey, I'm David 👋🏼
             </h1>
-            <p className="text-gray-500 md:text-xl">
+            <p className="text-gray-500 dark:text-gray-300 md:text-xl">
               A {lastExp.title} at {lastExp.company}
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function Index() {
           <h5 className="mb-2 text-base uppercase text-gray-400">
             {projects?.[0]?.category}
           </h5>
-          <h3 className="text-3xl font-bold tracking-tighter">
+          <h3 className="text-3xl font-bold tracking-tighter dark:text-white">
             {projects?.[0]?.title}
           </h3>
         </CardLink>
@@ -125,7 +125,7 @@ export default function Index() {
           <h5 className="mb-2 text-base uppercase text-gray-400">
             {projects?.[1]?.category}
           </h5>
-          <h3 className="text-3xl font-bold tracking-tighter">
+          <h3 className="text-3xl font-bold tracking-tighter dark:text-white">
             {projects?.[1]?.title}
           </h3>
         </CardLink>
@@ -162,7 +162,7 @@ export default function Index() {
           <h5 className="mb-2 text-base uppercase text-gray-400">
             {projects?.[2]?.category}
           </h5>
-          <h3 className="text-3xl font-bold tracking-tighter">
+          <h3 className="text-3xl font-bold tracking-tighter dark:text-white">
             {projects?.[2]?.title}
           </h3>
         </CardLink>
@@ -173,7 +173,7 @@ export default function Index() {
         className="card-wrapper large-card col-span-2"
       >
         <CardLink uri="/contact" classes={{ children: "justify-end" }}>
-          <p className="text-2xl font-medium tracking-tighter md:text-[28px]">
+          <p className="text-2xl font-medium tracking-tighter dark:text-white md:text-[28px]">
             Let's work together ✨
           </p>
           <h2 className="text-5xl font-bold leading-none tracking-tighter text-primary-500 md:text-[56px]">

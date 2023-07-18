@@ -60,7 +60,7 @@ export default function Resume() {
                 src="/assets/avatar.png"
                 alt="avatar"
               />
-              <h1 className="mt-4 text-3xl font-bold tracking-tighter">
+              <h1 className="mt-4 text-3xl font-bold tracking-tighter dark:text-white">
                 David Acevedo
               </h1>
               <h2 className="text-2xl tracking-tighter text-primary-500">
@@ -68,21 +68,23 @@ export default function Resume() {
               </h2>
             </div>
             <div>
-              <p className="text-xl text-gray-500">hello@david-acevedo.com</p>
+              <p className="text-xl text-gray-500 dark:text-gray-300">
+                hello@david-acevedo.com
+              </p>
             </div>
             <div className="flex gap-3">
               <a
                 href="mailto:hello@david-acevedo.com"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border-2 border-secondary-900 py-2 px-4 text-sm font-medium text-secondary-900 transition-all hover:bg-secondary-900 hover:text-white"
+                className="rounded-full border-2 border-secondary-900 py-2 px-4 text-sm font-medium text-secondary-900 transition-all hover:bg-secondary-900 hover:text-white dark:border-secondary-500 dark:text-secondary-500 dark:hover:bg-secondary-500 dark:hover:text-zinc-700"
               >
                 Contact me
               </a>
               <a
                 href="/pdf"
                 download="David_Acevedo_CV.pdf"
-                className="rounded-full border-2 border-secondary-900 bg-secondary-900 py-2 px-4 text-sm font-medium text-white transition-all hover:border-secondary-800 hover:bg-secondary-800"
+                className="rounded-full border-2 border-secondary-900 bg-secondary-900 py-2 px-4 text-sm font-medium text-white transition-all hover:border-secondary-800 hover:bg-secondary-800 dark:border-secondary-500 dark:bg-secondary-500 dark:hover:border-secondary-700 dark:hover:bg-secondary-700"
               >
                 Download CV
               </a>
@@ -96,7 +98,7 @@ export default function Resume() {
               href="https://github.com/acevedoposada"
               className="group flex items-center pb-4"
             >
-              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500">
+              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500 dark:text-white">
                 Github
               </p>
               <IconButton className="-rotate-45">
@@ -108,7 +110,7 @@ export default function Resume() {
               href="https://www.linkedin.com/in/cristian-david-acevedo-posada/"
               className="group flex items-center py-4"
             >
-              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500">
+              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500 dark:text-white">
                 Linkedin
               </p>
               <IconButton className="-rotate-45">
@@ -120,7 +122,7 @@ export default function Resume() {
               href="https://www.instagram.com/davidchacevedo_/"
               className="group flex items-center pt-4"
             >
-              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500">
+              <p className="w-full text-xl font-semibold leading-none tracking-tight group-hover:text-primary-500 dark:text-white">
                 Instagram
               </p>
               <IconButton className="-rotate-45">
@@ -138,7 +140,7 @@ export default function Resume() {
       >
         <div className="flex flex-col gap-1">
           <motion.h2
-            className="text-[28px] font-semibold tracking-tighter"
+            className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
           >
             About me
@@ -154,7 +156,7 @@ export default function Resume() {
         </div>
         <div className="flex flex-col gap-1">
           <motion.h2
-            className="text-[28px] font-semibold tracking-tighter"
+            className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
           >
             Experience
@@ -165,7 +167,7 @@ export default function Resume() {
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {exp.title}
                 </h4>
-                <h5 className="text-lg tracking-tighter text-secondary-900">
+                <h5 className="text-lg tracking-tighter text-secondary-900 dark:text-secondary-700">
                   {exp.company}
                 </h5>
                 <p className="text-base tracking-tighter text-gray-500">
@@ -196,7 +198,7 @@ export default function Resume() {
         </div>
         <div className="flex flex-col gap-1">
           <motion.h2
-            className="text-[28px] font-semibold tracking-tighter"
+            className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
           >
             Education
@@ -207,7 +209,7 @@ export default function Resume() {
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {edu.title}
                 </h4>
-                <h5 className="text-lg tracking-tighter text-secondary-900">
+                <h5 className="text-lg tracking-tighter text-secondary-900 dark:text-secondary-700">
                   {edu.center}
                 </h5>
                 <p className="text-base tracking-tighter text-gray-500">
@@ -225,7 +227,7 @@ export default function Resume() {
         </div>
         <div className="flex flex-col gap-1">
           <motion.h2
-            className="text-[28px] font-semibold tracking-tighter"
+            className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
           >
             Skills
@@ -244,7 +246,7 @@ export default function Resume() {
         </div>
         <div className="flex flex-col gap-1">
           <motion.h2
-            className="text-[28px] font-semibold tracking-tighter"
+            className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
           >
             Interests
