@@ -11,7 +11,7 @@ export default function GlobalLoading() {
       {active && (
         <motion.div
           key="loading-general"
-          className="fixed z-50 flex h-full w-full flex-col items-center justify-center bg-blue-500 bg-opacity-50 backdrop-blur-md"
+          className="dark: fixed z-50 flex h-full w-full flex-col items-center justify-center bg-blue-500 bg-opacity-50 backdrop-blur-md dark:bg-zinc-700 dark:bg-opacity-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -19,7 +19,7 @@ export default function GlobalLoading() {
           <div className="h-96 select-none">
             <video src="/assets/loading-avatar.MOV" autoPlay loop muted />
           </div>
-          <h3 className="mt-4 text-4xl font-semibold text-slate-700">
+          <h3 className="mt-4 text-4xl font-semibold text-slate-700 dark:text-white">
             Loading
           </h3>
         </motion.div>

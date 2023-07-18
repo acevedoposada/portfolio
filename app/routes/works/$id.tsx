@@ -1,6 +1,7 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { BsArrowLeftShort } from "react-icons/bs";
+import PreloadImage from "react-preload-image";
 import { motion } from "framer-motion";
 
 import { db } from "~/utils/db.server";
@@ -16,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: `David Acevedo | ${data?.project?.title}`,
+    title: `David Acevedo | ${data?.project?.title} ${data?.project?.category}`,
   };
 };
 
@@ -35,7 +36,7 @@ export default function ProjectDetails() {
         </motion.span>
         <div className="-ml-0.5 overflow-x-hidden">
           <motion.h2
-            className="pl-4 text-xl font-semibold tracking-tighter text-cyan-900 md:text-3xl"
+            className="pl-4 text-xl font-semibold tracking-tighter text-cyan-900 dark:text-secondary-600 md:text-3xl"
             initial={{
               translateX: -100,
               opacity: 0,
@@ -48,7 +49,7 @@ export default function ProjectDetails() {
         </div>
       </Link>
       <section className="pt-8 pb-12">
-        <p className="mb-10 text-3xl font-medium tracking-tighter md:text-7xl">
+        <p className="mb-10 text-3xl font-medium tracking-tighter dark:text-white md:text-7xl">
           {project.description}
         </p>
         <a
@@ -66,10 +67,11 @@ export default function ProjectDetails() {
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
         >
-          <img
-            className="h-full w-full object-cover"
+          <PreloadImage
+            className="relative h-full w-full object-cover"
             src={project.images.portrait_logo}
             alt="portrait"
+            lazy
           />
         </motion.div>
       )}

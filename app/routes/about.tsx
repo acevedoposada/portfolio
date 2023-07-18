@@ -92,7 +92,7 @@ export default function About() {
         variants={item}
         className="card-wrapper col-span-1 flex flex-col justify-end p-8 md:col-span-2"
       >
-        <h2 className="mb-2 text-[24px] font-bold tracking-tighter md:text-[28px]">
+        <h2 className="mb-2 text-[24px] font-bold tracking-tighter dark:text-white md:text-[28px]">
           Experience
         </h2>
         <div className="flex flex-col gap-2 md:gap-0">
@@ -102,7 +102,7 @@ export default function About() {
               className="flex items-start md:items-center md:gap-2"
             >
               <div className="flex w-2/3 flex-col md:w-full md:flex-row md:items-center md:gap-2">
-                <p className="whitespace-nowrap text-lg font-light tracking-tighter text-gray-600">
+                <p className="whitespace-nowrap text-lg font-light tracking-tighter text-gray-600 dark:text-gray-300">
                   {exp.company}
                 </p>
                 <span className="hidden h-[1px] w-full bg-gray-200 md:block" />
@@ -132,7 +132,7 @@ export default function About() {
           }}
         >
           <BsLinkedin
-            className="text-primary-700 transition-colors group-hover:text-primary-900"
+            className="text-primary-700 transition-colors group-hover:text-primary-900 dark:text-primary-500 dark:group-hover:text-primary-600"
             size={140}
           />
         </CardLink>
@@ -142,7 +142,7 @@ export default function About() {
         className="card-wrapper col-span-1 md:col-span-2"
       >
         <CardLink uri="/contact" classes={{ children: "justify-end" }}>
-          <p className="text-2xl font-medium tracking-tighter md:text-[28px]">
+          <p className="text-2xl font-medium tracking-tighter dark:text-white md:text-[28px]">
             Let's work together ✨
           </p>
           <h2 className="text-5xl font-bold leading-none tracking-tighter text-primary-500 md:text-[56px]">

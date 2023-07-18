@@ -24,6 +24,8 @@ import GlobalLoading from "~/components/global-loading";
 import type { Navigation } from "~/utils/routes";
 import globalStyles from "~/styles/global.css";
 import { db } from "~/utils/db.server";
+import { useContext } from "react";
+import { ThemeContext } from "./context/theme";
 
 export const links: LinksFunction = () => {
   return [
@@ -56,14 +58,16 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   const { routes } = useLoaderData();
+  const { isDark } = useContext(ThemeContext);
+
   return (
-    <html lang="en">
+    <html lang="en" className={isDark ? "dark" : "light"}>
       <head>
         <Meta />
         <Links />
       </head>
       <NavigationContext.Provider value={{ routes }}>
-        <body className="bg-sky-100">
+        <body className="bg-sky-100 dark:bg-zinc-900">
           <GlobalLoading />
           <GeneralLayout>
             <Outlet />

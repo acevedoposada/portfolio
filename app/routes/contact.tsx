@@ -49,7 +49,7 @@ export default function Contact() {
           <div className="flex flex-col gap-4">
             <motion.h2
               variants={item}
-              className="text-[40px] font-semibold tracking-tighter"
+              className="text-[40px] font-semibold tracking-tighter dark:text-white"
             >
               Get in Touch ✨
             </motion.h2>
@@ -63,7 +63,9 @@ export default function Contact() {
           </div>
           <div className="flex flex-col gap-8">
             <motion.div variants={item}>
-              <p className="text-sm tracking-tight">WANT TO CALL ME?</p>
+              <p className="text-sm tracking-tight dark:text-white">
+                WANT TO CALL ME?
+              </p>
               <a
                 href="https://calendly.com/david-acevedo-/30min"
                 target="_blank"
@@ -74,7 +76,9 @@ export default function Contact() {
               </a>
             </motion.div>
             <motion.div variants={item}>
-              <p className="text-sm tracking-tight">JUST WANT TO EMAIL ME?</p>
+              <p className="text-sm tracking-tight dark:text-white">
+                JUST WANT TO EMAIL ME?
+              </p>
               <a
                 href="mailto:hello@david-acevedo.com"
                 target="_blank"
@@ -150,7 +154,7 @@ export default function Contact() {
           <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
             Web
           </p>
-          <p className="text-lg">
+          <p className="text-lg dark:text-white">
             Tailor-made websites according to the requirements you request
           </p>
         </Card>
@@ -159,7 +163,7 @@ export default function Contact() {
           <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
             Visual
           </p>
-          <p className="text-lg">
+          <p className="text-lg dark:text-white">
             Trained to create graphic pieces and make your sites beautiful
           </p>
         </Card>
@@ -168,7 +172,7 @@ export default function Contact() {
           <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
             Analysis
           </p>
-          <p className="text-lg">
+          <p className="text-lg dark:text-white">
             Analyze, organize and plan information systems requirements
           </p>
         </Card>

@@ -4,9 +4,9 @@ import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
-import type { FuncComponent } from "~/models/common.types";
 import { useGeneralLayout } from "~/controllers/general-layout";
-import { Footer } from "~/components";
+import type { FuncComponent } from "~/models/common.types";
+import { Footer, ToggleTheme } from "~/components";
 
 import styles from "./styles.css";
 import {
@@ -49,7 +49,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
         initial="collapsed"
         animate={showNavbar ? "amplified" : "collapsed"}
         className={clsx(
-          "header fixed top-0 right-0 left-0 z-10 flex h-24 flex-col items-center gap-[40px] overflow-hidden bg-sky-100 bg-opacity-40 pt-6 pb-8 md:pt-8",
+          "header fixed top-0 right-0 left-0 z-10 flex h-24 flex-col items-center gap-[40px] overflow-hidden bg-sky-100 bg-opacity-40 pt-6 pb-8 dark:bg-zinc-900 dark:bg-opacity-40 md:pt-8",
           {
             "!bg-opacity-80": showNavbar,
           }
@@ -69,7 +69,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
                       bounce: 0.6,
                       delay: 0.1,
                     }}
-                    className="pointer-events-none select-none whitespace-nowrap text-xl font-bold text-cyan-900"
+                    className="pointer-events-none select-none whitespace-nowrap text-xl font-bold text-cyan-900 dark:text-secondary-700"
                   >
                     David Acevedo
                     <span className="text-3xl text-sky-500">.</span>
@@ -86,7 +86,8 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
           >
             {links}
           </motion.div>
-          <div className="flex justify-end">
+          <div className="flex items-center justify-end gap-4">
+            <ToggleTheme />
             <motion.button
               className="relative block h-[48px] w-[48px] md:hidden"
               initial={{ scale: 0 }}
@@ -99,7 +100,10 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
                 initial="open"
                 animate={showNavbar ? "close" : "open"}
               >
-                <HiMenuAlt3 size={25} className="text-secondary-900" />
+                <HiMenuAlt3
+                  size={25}
+                  className="text-secondary-900 dark:text-white"
+                />
               </motion.span>
               <motion.span
                 className="button--icon absolute"
@@ -155,7 +159,7 @@ export const GeneralLayout: FuncComponent = ({ children }) => {
             initial={{ opacity: 0, y: 80 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            <h1 className="title relative left-0 m-0 whitespace-nowrap text-center font-semibold leading-none text-sky-200">
+            <h1 className="title relative left-0 m-0 whitespace-nowrap text-center font-semibold leading-none text-sky-200 dark:text-zinc-800">
               {title}
             </h1>
           </motion.div>

@@ -17,7 +17,7 @@ export const Card: FuncComponent<CardProps> = ({
     <motion.div
       {...props}
       className={clsx(
-        "rounded-3xl bg-card shadow-lg shadow-primary-100 transition-shadow hover:shadow-primary-200",
+        "rounded-3xl bg-card shadow-lg shadow-primary-100 transition-shadow hover:shadow-primary-200 dark:bg-zinc-700 dark:shadow-[rgba(0,0,0,0.2)] dark:hover:shadow-[rgba(0,0,0,0.4)]",
         className
       )}
     >
