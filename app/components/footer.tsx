@@ -2,6 +2,8 @@ import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 import { Link } from "@remix-run/react";
 import { useContext } from "react";
 
+import { version } from "../../package.json";
+
 import { NavigationContext } from "~/context/navigation";
 
 export const Footer = () => {
@@ -60,7 +62,9 @@ export const Footer = () => {
         </a>
       </div>
       <div className="py-4 text-gray-400">
-        <span>© {new Date().getFullYear()} Portfolio. v1.0.0</span>
+        <span>
+          © {new Date().getFullYear()} Portfolio. v{version}
+        </span>
       </div>
     </footer>
   );
