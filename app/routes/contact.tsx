@@ -127,17 +127,17 @@ export default function Contact() {
         >
           <motion.input
             variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none"
+            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
             placeholder="Name"
           />
           <motion.input
             variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none"
+            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
             placeholder="Email"
           />
           <motion.textarea
             variants={cardChildren}
-            className="min-h-[150px] rounded-lg bg-sky-100 p-4 focus:outline-none"
+            className="min-h-[150px] rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
             placeholder="Type your message"
           ></motion.textarea>
           <motion.button
