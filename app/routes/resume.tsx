@@ -252,13 +252,13 @@ export default function Resume() {
             Interests
           </motion.h2>
           <div className="w-full columns-[130px] gap-2 md:w-1/2 md:min-w-[450px] md:columns-[200px]">
-            {resume.skill?.map((skill: any) => (
+            {resume.interest?.map((interest: any) => (
               <motion.p
-                key={skill.description}
+                key={interest.description}
                 className="mb-2 text-xl font-medium tracking-tighter text-gray-500 text-opacity-80 md:text-2xl"
                 variants={itemSlide}
               >
-                {skill.description}
+                {interest.description}
               </motion.p>
             ))}
           </div>
