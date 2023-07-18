@@ -81,10 +81,10 @@ export default function About() {
         variants={item}
         className="card-wrapper col-span-1 flex flex-col justify-end p-8 md:col-span-2 lg:bg-primary-500"
       >
-        <h2 className="mb-2 text-[24px] font-bold tracking-tighter md:text-[28px] md:text-white">
+        <h2 className="mb-2 text-[24px] font-bold tracking-tighter dark:text-white md:text-[28px] md:text-white">
           About me
         </h2>
-        <p className="text-lg leading-6 tracking-tighter text-gray-500 md:text-xl md:leading-7 lg:text-white lg:text-opacity-80">
+        <p className="text-lg leading-6 tracking-tighter text-gray-500 dark:text-gray-300 dark:text-opacity-100 md:text-xl md:leading-7 lg:text-white lg:text-opacity-80">
           {about.description}
         </p>
       </Card>
