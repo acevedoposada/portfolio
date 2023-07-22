@@ -142,12 +142,18 @@ export default function Resume() {
           <motion.h2
             className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             About me
           </motion.h2>
           <motion.p
             className="text-2xl tracking-tighter text-gray-500 text-opacity-80"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             {resume.about?.[0]?.["short-description"]} Currently{" "}
             {experiences?.[0]?.title} at {experiences?.[0]?.company}. Take a
@@ -158,12 +164,21 @@ export default function Resume() {
           <motion.h2
             className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             Experience
           </motion.h2>
           <div className="flex flex-col gap-8">
             {experiences.map((exp) => (
-              <motion.div key={exp.id} variants={itemSlide}>
+              <motion.div
+                key={exp.id}
+                variants={itemSlide}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {exp.title}
                 </h4>
@@ -200,12 +215,21 @@ export default function Resume() {
           <motion.h2
             className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             Education
           </motion.h2>
           <div className="flex flex-col gap-8">
             {education.map((edu, i) => (
-              <motion.div key={i} variants={itemSlide}>
+              <motion.div
+                key={i}
+                variants={itemSlide}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.8 }}
+              >
                 <h4 className="text-2xl font-medium tracking-tighter text-primary-500">
                   {edu.title}
                 </h4>
@@ -229,6 +253,9 @@ export default function Resume() {
           <motion.h2
             className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             Skills
           </motion.h2>
@@ -238,6 +265,9 @@ export default function Resume() {
                 key={skill.description}
                 className="mb-2 text-xl font-medium tracking-tighter text-gray-500 text-opacity-80 md:text-2xl"
                 variants={itemSlide}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.8 }}
               >
                 {skill.description}
               </motion.p>
@@ -248,6 +278,9 @@ export default function Resume() {
           <motion.h2
             className="text-[28px] font-semibold tracking-tighter dark:text-white"
             variants={itemSlide}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.8 }}
           >
             Interests
           </motion.h2>
@@ -257,6 +290,9 @@ export default function Resume() {
                 key={interest.description}
                 className="mb-2 text-xl font-medium tracking-tighter text-gray-500 text-opacity-80 md:text-2xl"
                 variants={itemSlide}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.8 }}
               >
                 {interest.description}
               </motion.p>

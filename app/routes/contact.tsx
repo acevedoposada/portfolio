@@ -4,6 +4,20 @@ import { motion } from "framer-motion";
 import { Card } from "~/components";
 import { RiLayoutMasonryLine, RiPenNibLine } from "react-icons/ri";
 import { TbPresentation } from "react-icons/tb";
+import { Form, useActionData } from "@remix-run/react";
+import type { ActionArgs } from "@remix-run/server-runtime";
+import {
+  validateEmail,
+  validateLength,
+  validateRequire,
+} from "~/utils/validations";
+import clsx from "clsx";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const container = {
   hidden: { opacity: 0 },
@@ -36,7 +50,25 @@ const cardChildren = {
   appear: { x: 0, opacity: 1 },
 };
 
+export async function action({ request }: ActionArgs) {
+  const data: ContactFormData = Object.fromEntries(
+    await request.formData()
+  ) as unknown as ContactFormData;
+
+  const formErrors = {
+    name: validateRequire(data.name) || validateLength(data.name, 3),
+    email: validateRequire(data.email) || validateEmail(data.email),
+    message: validateRequire(data.message) || validateLength(data.message, 10),
+  };
+
+  if (Object.values(formErrors).some(Boolean)) return { formErrors };
+
+  return { data };
+}
+
 export default function Contact() {
+  const actionData = useActionData();
+
   return (
     <div className="grid">
       <motion.div
@@ -119,39 +151,50 @@ export default function Contact() {
             </motion.a>
           </div>
         </aside>
-        <Card
-          variants={card}
-          initial="hide"
-          animate="appear"
-          className="flex w-full flex-col gap-6 overflow-hidden p-6 shadow-2xl"
-        >
-          <motion.input
-            variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Name"
-          />
-          <motion.input
-            variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Email"
-          />
-          <motion.textarea
-            variants={cardChildren}
-            className="min-h-[150px] rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Type your message"
-          ></motion.textarea>
-          <motion.button
-            variants={cardChildren}
-            className="w-full rounded-lg bg-primary-500 p-4 font-medium text-white hover:bg-primary-400"
+        <Form method="post" className="w-full">
+          <Card
+            variants={card}
+            initial="hide"
+            animate="appear"
+            className="flex w-full flex-col gap-6 overflow-hidden p-6 shadow-2xl"
           >
-            Send Message
-          </motion.button>
-        </Card>
+            <motion.input
+              variants={cardChildren}
+              className={clsx(
+                "rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600 dark:text-white"
+              )}
+              placeholder="Name"
+              name="name"
+            />
+            <motion.input
+              variants={cardChildren}
+              className={clsx(
+                "rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600 dark:text-white"
+              )}
+              placeholder="Email"
+              name="email"
+            />
+            <motion.textarea
+              variants={cardChildren}
+              className={clsx(
+                "min-h-[150px] resize-none rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600 dark:text-white"
+              )}
+              placeholder="Type your message"
+              name="message"
+            ></motion.textarea>
+            <motion.button
+              variants={cardChildren}
+              className="w-full rounded-lg bg-primary-500 p-4 font-medium text-white hover:bg-primary-400"
+            >
+              Send Message
+            </motion.button>
+          </Card>
+        </Form>
       </motion.div>
       <section className="grid gap-6 py-16 md:grid-cols-2 lg:grid-cols-3">
         <Card className="py-10 px-6">
           <RiLayoutMasonryLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Web
           </p>
           <p className="text-lg dark:text-white">
@@ -160,7 +203,7 @@ export default function Contact() {
         </Card>
         <Card className="py-10 px-6">
           <RiPenNibLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Visual
           </p>
           <p className="text-lg dark:text-white">
@@ -169,7 +212,7 @@ export default function Contact() {
         </Card>
         <Card className="py-10 px-6 md:col-span-2 lg:col-span-1">
           <TbPresentation className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Analysis
           </p>
           <p className="text-lg dark:text-white">

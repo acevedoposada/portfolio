@@ -1,6 +1,7 @@
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { RiBodyScanFill } from "react-icons/ri";
+import PreloadImage from "react-preload-image";
 import { BsLinkedin } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { orderBy } from "lodash";
@@ -18,6 +19,7 @@ export const loader: LoaderFunction = async () => {
   const querySnapshot = await db
     .collection("resume")
     .where("type", "==", "experience")
+    .orderBy("position", "asc")
     .limit(3)
     .get();
 
@@ -64,8 +66,17 @@ export default function About() {
     >
       <Card
         variants={item}
-        className="card-wrapper card-image col-span-3 bg-cover bg-center"
-      />
+        className="card-wrapper group col-span-3 overflow-hidden bg-cover bg-center"
+      >
+        <PreloadImage
+          className="relative h-full w-full object-cover transition-transform group-hover:scale-110"
+          alt=""
+          src="/assets/working.webp"
+          width={500}
+          height={200}
+          lazy
+        />
+      </Card>
       <Card
         variants={item}
         className="card-wrapper flex flex-col justify-end bg-primary-500 p-8 pr-14"
