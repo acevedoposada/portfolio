@@ -11,7 +11,7 @@ export default function GlobalLoading() {
       {active && (
         <motion.div
           key="loading-general"
-          className="dark: fixed z-50 flex h-full w-full flex-col items-center justify-center bg-primary-300 bg-opacity-50 backdrop-blur-md dark:bg-zinc-700 dark:bg-opacity-50"
+          className="fixed z-50 flex h-full w-full flex-col items-center justify-center bg-primary-50 bg-opacity-50 backdrop-blur-md dark:bg-zinc-700 dark:bg-opacity-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
