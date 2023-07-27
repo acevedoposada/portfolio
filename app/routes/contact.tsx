@@ -1,9 +1,27 @@
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
-import { motion } from "framer-motion";
-
-import { Card } from "~/components";
 import { RiLayoutMasonryLine, RiPenNibLine } from "react-icons/ri";
+import { Form, useActionData, useTransition } from "@remix-run/react";
 import { TbPresentation } from "react-icons/tb";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Lottie from "react-lottie";
+
+import type { ActionArgs } from "@remix-run/server-runtime";
+
+import { Card, Dialog, TextField } from "~/components";
+import animationData from "~/assets/lottie/done.json";
+import {
+  validateEmail,
+  validateLength,
+  validateRequire,
+} from "~/utils/validations";
+import { db } from "~/utils/db.server";
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const container = {
   hidden: { opacity: 0 },
@@ -36,7 +54,46 @@ const cardChildren = {
   appear: { x: 0, opacity: 1 },
 };
 
+export async function action({ request }: ActionArgs) {
+  const data: ContactFormData = Object.fromEntries(
+    await request.formData()
+  ) as unknown as ContactFormData;
+
+  const formErrors = {
+    name: validateRequire(data.name) || validateLength(data.name, 3),
+    email: validateRequire(data.email) || validateEmail(data.email),
+    message: validateRequire(data.message) || validateLength(data.message, 10),
+  };
+
+  if (Object.values(formErrors).some(Boolean)) return { formErrors };
+
+  const response = await db.collection("contact").add(data);
+
+  if (!response.id) return { error: "Document can't save" };
+
+  return { response: { id: response.id, ...(await response.get()).data() } };
+}
+
 export default function Contact() {
+  const actionData = useActionData();
+  const transition = useTransition();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCloseDialog = () => setOpenDialog(false);
+
+  useEffect(() => {
+    let timeout: any;
+    if (actionData?.response?.id) {
+      setOpenDialog(true);
+      timeout = setTimeout(() => {
+        setOpenDialog(false);
+      }, 4000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [actionData]);
+
   return (
     <div className="grid">
       <motion.div
@@ -119,39 +176,57 @@ export default function Contact() {
             </motion.a>
           </div>
         </aside>
-        <Card
-          variants={card}
-          initial="hide"
-          animate="appear"
-          className="flex w-full flex-col gap-6 overflow-hidden p-6 shadow-2xl"
+        <Form
+          key={actionData?.response?.id}
+          action="/contact"
+          method="post"
+          className="w-full"
         >
-          <motion.input
-            variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Name"
-          />
-          <motion.input
-            variants={cardChildren}
-            className="rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Email"
-          />
-          <motion.textarea
-            variants={cardChildren}
-            className="min-h-[150px] rounded-lg bg-sky-100 p-4 focus:outline-none dark:bg-zinc-600"
-            placeholder="Type your message"
-          ></motion.textarea>
-          <motion.button
-            variants={cardChildren}
-            className="w-full rounded-lg bg-primary-500 p-4 font-medium text-white hover:bg-primary-400"
+          <Card
+            variants={card}
+            initial="hide"
+            animate="appear"
+            className="flex w-full flex-col gap-6 overflow-hidden p-6 shadow-2xl"
           >
-            Send Message
-          </motion.button>
-        </Card>
+            <TextField
+              variants={cardChildren}
+              fullWidth
+              placeholder="Name"
+              name="name"
+              error={actionData?.formErrors?.name}
+            />
+            <TextField
+              variants={cardChildren}
+              fullWidth
+              placeholder="Email"
+              name="email"
+              type="email"
+              error={actionData?.formErrors?.email}
+            />
+            <TextField
+              variants={cardChildren}
+              fullWidth
+              placeholder="Type your message"
+              name="message"
+              multiline
+              error={actionData?.formErrors?.message}
+            />
+            <motion.button
+              variants={cardChildren}
+              className="w-full rounded-lg bg-primary-500 p-4 font-medium text-white hover:bg-primary-400"
+              disabled={transition.state !== "idle"}
+            >
+              {transition.state !== "submitting"
+                ? "Send Message"
+                : "Sending..."}
+            </motion.button>
+          </Card>
+        </Form>
       </motion.div>
       <section className="grid gap-6 py-16 md:grid-cols-2 lg:grid-cols-3">
         <Card className="py-10 px-6">
           <RiLayoutMasonryLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Web
           </p>
           <p className="text-lg dark:text-white">
@@ -160,7 +235,7 @@ export default function Contact() {
         </Card>
         <Card className="py-10 px-6">
           <RiPenNibLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Visual
           </p>
           <p className="text-lg dark:text-white">
@@ -169,7 +244,7 @@ export default function Contact() {
         </Card>
         <Card className="py-10 px-6 md:col-span-2 lg:col-span-1">
           <TbPresentation className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
-          <p className="text-xl font-medium tracking-tighter text-gray-500 md:mt-2 md:text-2xl">
+          <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Analysis
           </p>
           <p className="text-lg dark:text-white">
@@ -177,6 +252,26 @@ export default function Contact() {
           </p>
         </Card>
       </section>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        autoHideDuration={5000}
+      >
+        <div className="relative w-full max-w-xs">
+          <Lottie
+            options={{
+              autoplay: true,
+              animationData: animationData,
+              rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice",
+              },
+            }}
+          />
+          <h2 className="absolute bottom-0 w-full text-center text-xl font-bold">
+            Information sent correctly!
+          </h2>
+        </div>
+      </Dialog>
     </div>
   );
 }
