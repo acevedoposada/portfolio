@@ -33,6 +33,7 @@ export async function getPosts() {
     return distribution;
   };
 
+  console.log(process.env);
   return { items: data, distribution: getDistribution() };
 }
 
@@ -44,8 +45,6 @@ export default function Blog() {
   const { items, distribution } = useLoaderData();
 
   const [selectedId, setSelectedId] = useState<any | null>(null);
-
-  console.log(process.env);
 
   return (
     <div className="blog__content mx-auto pt-6 md:w-11/12">
