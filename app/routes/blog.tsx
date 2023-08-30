@@ -45,6 +45,8 @@ export default function Blog() {
 
   const [selectedId, setSelectedId] = useState<any | null>(null);
 
+  console.log(process.env);
+
   return (
     <div className="blog__content mx-auto pt-6 md:w-11/12">
       <div className="blog__content__posts md w-full gap-7">
