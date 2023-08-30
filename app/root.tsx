@@ -50,6 +50,7 @@ export const loader: LoaderFunction = async () => {
   const environment: string = process.env.ENVIRONMENT as string;
 
   console.log("🚀 ENVIRONMENT ==> " + environment);
+  console.log(process.env);
 
   return {
     routes: orderBy(
