@@ -4,4 +4,5 @@ export interface Navigation {
   label: string | null;
   title: string | null;
   enable: boolean;
+  environment: { prod: boolean; dev: boolean };
 }
