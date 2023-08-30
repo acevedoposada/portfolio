@@ -223,8 +223,13 @@ export default function Contact() {
           </Card>
         </Form>
       </motion.div>
-      <section className="grid gap-6 py-16 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="py-10 px-6">
+      <motion.section
+        variants={card}
+        initial="hide"
+        animate="appear"
+        className="grid gap-6 py-16 md:grid-cols-2 lg:grid-cols-3"
+      >
+        <Card variants={card} className="py-10 px-6">
           <RiLayoutMasonryLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
           <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Web
@@ -233,7 +238,7 @@ export default function Contact() {
             Tailor-made websites according to the requirements you request
           </p>
         </Card>
-        <Card className="py-10 px-6">
+        <Card variants={card} className="py-10 px-6">
           <RiPenNibLine className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
           <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Visual
@@ -242,7 +247,10 @@ export default function Contact() {
             Trained to create graphic pieces and make your sites beautiful
           </p>
         </Card>
-        <Card className="py-10 px-6 md:col-span-2 lg:col-span-1">
+        <Card
+          variants={card}
+          className="py-10 px-6 md:col-span-2 lg:col-span-1"
+        >
           <TbPresentation className="mb-8 text-[48px] text-primary-500 opacity-90 md:text-[80px]" />
           <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-white md:mt-2 md:text-2xl">
             Analysis
@@ -251,7 +259,7 @@ export default function Contact() {
             Analyze, organize and plan information systems requirements
           </p>
         </Card>
-      </section>
+      </motion.section>
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
