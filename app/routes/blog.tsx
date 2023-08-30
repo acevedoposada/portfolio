@@ -32,8 +32,6 @@ export async function getPosts() {
     }
     return distribution;
   };
-
-  console.log(process.env);
   return { items: data, distribution: getDistribution() };
 }
 

@@ -1,4 +1,4 @@
-import { orderBy } from "lodash";
+import { orderBy, reduce } from "lodash";
 import type {
   LinksFunction,
   LoaderFunction,
@@ -47,7 +47,22 @@ export const loader: LoaderFunction = async () => {
     })
   );
 
-  return { routes: orderBy(routes, "order") };
+  const environment: string = process.env.ENVIRONMENT as string;
+
+  return {
+    routes: orderBy(
+      reduce(
+        routes,
+        (prev: Navigation[], curr) => {
+          if (!curr.environment[environment as keyof typeof curr.environment])
+            return prev;
+          return [...prev, curr];
+        },
+        []
+      ),
+      "order"
+    ),
+  };
 };
 
 export const meta: MetaFunction = () => ({
